@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css">
+    <title>Task 0</title>
+    <script async>
+      // Задача 0. Обчислити значення виразів
+      // Вхідні дані: а, b, c
+      // Результат: s1, s2, s3, s4
+      let a = parseFloat(prompt("Введіть значення а", "0"));
+      let b = parseFloat(prompt("Введіть значення b", "0"));
+      let c = parseFloat(prompt("Введіть значення c", "0"));
+
+      let s1 = a + 12 + b;
+      let s2 = Math.sqrt((a + b) / (2 * a));
+      let s3 = Math.pow((a + b) * c, 1 / 3);
+      let s4 = Math.sin(a / -b);
+
+      alert(`S1 = ${s1.toFixed(4)}\nS2 = ${s3.toFixed(4)}\nS3 = ${s2.toFixed(4)}\nS4 = ${s4.toFixed(4)}`)
+
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">Задача 0. Обчислити значення виразів</h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

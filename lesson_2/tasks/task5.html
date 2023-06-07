@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css">
+    <title>Task 5</title>
+    <script async>
+      // Задача 5. Дано кількість секунд, що пройшла від початку доби. Визначити скільки це годин і хвилин.
+
+      // Вхідні дані: seconds - кількість секунд
+      // Результат: minutes - кількість хвилин, hours - кількість годин
+
+      let seconds = parseInt(prompt("Введіть кількість секунд, що пройшла від початку доби ", "0"));
+
+      let minutes = seconds / 60;
+      let hours = minutes / 60;
+
+      alert(`Кількість секунд: ${seconds}\nХвилин: ${minutes.toFixed(0)}\nГодин: ${hours.toFixed(0)}`);
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 5. Дано кількість секунд, що пройшла від початку доби. Визначити скільки це годин і хвилин.
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

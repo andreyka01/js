@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css">
+    <title>Task 1</title>
+    <script async>
+      // Задача 1. Знайти суму, добуток та частку двох дійсних чисел. Результат вивести у формі таблиці
+      // Вхідні дані: a - перше дійсне число, b - друге дійсне число
+      // Результат: S1 - cума двох чисел, S2 - добуток, S3 - частка
+      let a = parseFloat(prompt("Введіть значення а", "0"));
+      let b = parseFloat(prompt("Введіть значення b", "0"));
+
+      let s1 = a + b;
+      let s2 = a * b;
+      let s3 = a / b;
+
+      console.log(`S1 = ${s1.toFixed(4)}`);
+      console.log(`S3 = ${s2.toFixed(4)}`);
+      console.log(`S2 = ${s3.toFixed(4)}`);
+
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 1. Знайти суму, добуток та частку двох дійсних чисел.
+            Результат вивести у формі таблиці
+          </h2>
+          <div class="task__result">
+            <script async>
+            document.write(`<table border="1" border-collapse="collapse">
+              <thead>
+                <tr>
+                  <th>Операція</th>
+                  <th>Значення a</th>
+                  <th>Значення b</th>
+                  <th>Результат</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>a + b</td>
+                  <td>${a}</td>
+                  <td>${b}</td>
+                  <td>${s1.toFixed(4)}</td>
+                </tr>
+                <tr>
+                  <td>a * b</td>
+                  <td>${a}</td>
+                  <td>${b}</td>
+                  <td>${s2.toFixed(4)}</td>
+                </tr>
+                <tr>
+                  <td>a / b</td>
+                  <td>${a}</td>
+                  <td>${b}</td>
+                  <td>${s3.toFixed(4)}</td>
+                </tr>
+              </tbody>
+            </table>`)
+            </script>
+          </div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

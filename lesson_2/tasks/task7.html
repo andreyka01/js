@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css">
+    <title>Task 7</title>
+    <script async>
+      // Задача 7. Знайти суму випадкового номера місяця (від 1 до 12) та випадкового номера дня (від 0 до 6).
+
+      // Вхідні дані: firstMonth - номер першого місяця, lastMonth - номер останнього місяця, randomMonth - випадковий номер місяця,
+      //  firstDay - нижня границя для випадкового номера дня, lastDay - верхня границя для випадкового номера дня,  randomDay - випадковий номер дня
+      // Результат: sum - сумf випадкового номера місяця (від 1 до 12) та випадкового номера дня (від 0 до 6).
+
+      const firstMonth = 1;
+      const lastMonth = 12;
+      const firstDay = 0;
+      const lastDay = 6;
+
+      let randomMonth = firstMonth + Math.floor(Math.random() * (lastMonth - firstMonth + 1));
+      let randomDay = firstDay + Math.floor(Math.random() * (lastDay - firstDay + 1));
+      let sum = randomMonth + randomDay;
+
+      console.log(randomMonth);
+      console.log(randomDay);
+
+      alert(`Випадкове значення місяця: ${randomMonth}\nВипадкове значення дня: ${randomDay}\nСума: ${sum}`)
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 7. Знайти суму випадкового номера місяця (від 1 до 12) та
+            випадкового номера дня (від 0 до 6).
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
