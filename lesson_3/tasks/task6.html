@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 6</title>
+    <script>
+      // Задача 6. З клавіатури вводиться номер дня тижня. Вивести на екран назву дня.
+
+      // Вхідні дані: productCost1 - вартість першого товару, productCost2 - вартість другого товару, productCost3 - вартість третього товару, productQauntity1 - кількість одиниць першого товару, productQauntity2 - кількість одиниць другого товару, productQauntity3 - кількість одиниць третього товару
+      // Результат: proudctTotalCost1 - загальну вартість першого товару, proudctTotalCost2 - загальну вартість другого товару, proudctTotalCost3 - загальну вартість третього товару,  proudctTotalCost - загальна вартість всіх товарів
+
+      let productCost1 = parseFloat(
+        prompt("Введіть вартість першого товару", "100.00")
+      );
+      let productQauntity1 = parseInt(
+        prompt("Введіть кількість першого товару", "1")
+      );
+
+      let productCost2 = parseFloat(
+        prompt("Введіть вартість другого товару", "100.00")
+      );
+      let productQauntity2 = parseInt(
+        prompt("Введіть кількість другого товару", "1")
+      );
+
+      let productCost3 = parseFloat(
+        prompt("Введіть вартість третього товару", "100.00")
+      );
+      let productQauntity3 = parseInt(
+        prompt("Введіть кількість третього товару", "1")
+      );
+
+      let proudctTotalCost1 = productCost1 * productQauntity1;
+      let proudctTotalCost2 = productCost2 * productQauntity2;
+      let proudctTotalCost3 = productCost3 * productQauntity3;
+      let productTotalCost =
+        proudctTotalCost1 + proudctTotalCost2 + proudctTotalCost3;
+    </script>
+    <head>
+      <html>
+        <body>
+          <div class="wrapper">
+            <header class="header"></header>
+            <main class="block">
+              <div class="block__task task">
+                <h2 class="tast__name">
+                  Задача 6. З клавіатури вводиться номер дня тижня. Вивести на
+                  екран назву дня.
+                </h2>
+                <div class="task__result"></div>
+              </div>
+            </main>
+            <footer class="footer"></footer>
+          </div>
+        </body>
+      </html>
+    </head>
+  </head>
+</html>

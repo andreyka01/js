@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 4</title>
+    <script async>
+      // Задача 4. З клавіатури вводиться вік людини. Вивести на екран ким він є (дитиною у садочку, школярем, студентом, працівником, пенсіонером).
+
+      // Вхідні дані: centimetres - довжина у сантиметрах
+      // Результат: meters - довжина в метрах, kilometers - довжина в кілометрах
+
+      let centimetres = parseInt(prompt("Введіть довжину у сантимeтрах", "0"));
+
+      let meters = centimetres / 100;
+      let kilometers = meters / 1000;
+
+      alert(
+        `Довжина в сантиметрах: ${centimetres}\nДовжина в метрах: ${meters}\nДовжина в кілометрах: ${kilometers}`
+      );
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 4. З клавіатури вводиться вік людини. Вивести на екран ким
+            він є (дитиною у садочку, школярем, студентом, працівником,
+            пенсіонером).
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
