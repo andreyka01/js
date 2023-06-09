@@ -9,8 +9,31 @@
     <script async>
       // Задача 2. З клавіатури вводиться ціна товару і кількість грошей. Якщо грошей не вистачає то відмовляємо у покупці, інакше, якщо ще залишаються гроші, то пропонуємо купити лотерею за 4 грн.
 
-      // Вхідні дані: userYearBirth - рік народження користувача, currentYear - поточний рік
-      // Результат: userAge - кількість років користувача
+      // Вхідні дані: productPrice - ціна товару, moneyAmount - кількість грошей, lotteryCost - ціна лотерейного квитка, lotteryAmount - кількість квитків
+      // Результат: rest - решта 
+let productPrice = parseFloat(promt("Введуть ціну товару", "100.00"));
+let moneyAmount = parseFloat(promt("Введіть кількість грошей", "200.00"));
+const lotteryCost = 4;
+let lotteryAmount;
+
+if(isFinite(productPrice) && isFinite(moneyAmount)) {
+ if(productPrice > 0 && moneyAmount >=0) {
+ let rest = moneyAmount - productPrice;
+if(rest >= 4) {
+ lotteryAmount = Math.floor(rest / lotteryCost);
+ alert(`Во можете купити лотерений квиток в кількості: ${lotteryAmount} одиниці`);
+} 
+else {
+ alert("Не достатньо коштів");
+}
+} 
+else {
+ alert("Помилка! Значення має бути більше 0");
+}
+} 
+else {
+ alert("Помилка! Ви ввели не число");
+}
       let userYearBirth = parseInt(
         prompt("Введіть ваш рік народження ", "2000")
       );
