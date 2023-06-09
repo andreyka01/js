@@ -9,10 +9,41 @@
     <script async>
       // Задача 4. З клавіатури вводиться вік людини. Вивести на екран ким він є (дитиною у садочку, школярем, студентом, працівником, пенсіонером).
 
-      // Вхідні дані: centimetres - довжина у сантиметрах
-      // Результат: meters - довжина в метрах, kilometers - довжина в кілометрах
+      // Вхідні дані: userAge - вік людини
+      // Результат: result - дитина в садочку, школяр, студент, працівник, пенсіонер
 
-      let centimetres = parseInt(prompt("Введіть довжину у сантимeтрах", "0"));
+      let userAge = parseInt(prompt("Введіть вік людини", "20"));
+let result;
+if(isFinite(userAge)) {
+ if (userAge > 0) {
+ if(userAge < 7) {
+  result = "Дитина"
+alert(`Ця людина - ${result}`);
+} 
+if else(userAge >= 7 && userAge < 18) {
+  result = "Школяр";
+alert(`Ця людина - ${result}`);
+}
+if else (userAge >= 18 && userAge < 26) {
+ result = "Студент";
+alert(`Ця людина - ${result}`);
+}
+if else (userAge >= 26 && userAge < 60) {
+ result = "Працівник";
+alert(`Ця людина - ${result}`);
+}
+else {
+ result = "Пенсіонер";
+alert(`Ця людина - ${result}`);
+}
+} 
+else {
+alert("Помилка! Вік людини має бути більше 0");
+}
+} 
+else {
+ alert("Помилка! Введіть числове значення");
+}
 
       let meters = centimetres / 100;
       let kilometers = meters / 1000;
