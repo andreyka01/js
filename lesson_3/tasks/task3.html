@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 3</title>
+    <script async>
+      // Задача 3. Випадковим чином генерується число від 1 до 5. Спробуйте вгадати число за 2 спроби.
+
+      // Вхідні дані: minValue - мінімальне значення випадкового числа, maxValue - максимальне значення випадкового числа, firstAttempt - перша спроба, secondAttempt - друга спроба
+      // Результат: повідомлення про виграш чи програш
+
+      const maxValue = 5;
+      const minValue = 1;
+      let randomNumber =
+        minValue + Math.floor(Math.random() * (maxValue - minValue + 1));
+      console.log(randomNumber);
+
+      let firstAttempt = parseInt(prompt("Вгадайте число", "2"));
+      if (isFinite(firstAttempt)) {
+        if (firstAttempt >= 1 && firstAttempt <= 5) {
+          if (firstAttempt === randomNumber) {
+            alert(
+              `Вітаю! Ви вгадали число з першої спроби! Загадене число було ${randomNumber}`
+            );
+          } else {
+            alert(`У вас є ще одна спроба`);
+            let secondAttempt = parseInt(prompt("Вгадайте число", "2"));
+            if (isFinite(isFinite(firstAttempt))) {
+              if (secondAttempt >= 1 && secondAttempt <= 5) {
+                if (secondAttempt === randomNumber) {
+                  alert(
+                    `Вітаю! Ви вгадали число з другої спроби! Загадене число було ${randomNumber}`
+                  );
+                } else {
+                  alert(
+                    `На жаль, ви не вгалади число! Загадене число було ${randomNumber}`
+                  );
+                }
+              } else {
+                alert("Введене число не відповідає діапазону [1;5]");
+              }
+            } else {
+              alert("Введіть числове значення");
+            }
+          }
+        } else {
+          alert("Введене число не відповідає діапазону [1;5]");
+        }
+      } else {
+        alert("Введіть числове значення");
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 3. Випадковим чином генерується число від 1 до 5. Спробуйте
+            вгадати число за 2 спроби.
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
