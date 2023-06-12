@@ -18,15 +18,18 @@
 
       if(isFinite(productPrice) && isFinite(moneyAmount)) {
         if(productPrice > 0 && moneyAmount >=0) {
-        let rest = moneyAmount - productPrice;
-        if(rest >= 4) {
-          lotteryAmount = Math.floor(rest / lotteryCost);
-          rest = rest - (lotteryAmount * lotteryCost);
-            alert(`Во можете купити лотерений квиток в кількості: ${lotteryAmount} одиниці\nВаша решта складатиме: ${rest}`);
-          } 
-          else {
+          if (moneyAmount >= productPrice) {
+            alert('Дякую за покупку!');
+            let rest = moneyAmount - productPrice;
+            if(rest >= 4) {
+              lotteryAmount = Math.floor(rest / lotteryCost);
+              rest = rest - (lotteryAmount * lotteryCost);
+              alert(`Ви можете купити лотерений квиток в кількості: ${lotteryAmount} одиниці\nВаша решта складатиме: ${rest}`);
+            } 
+          } else {
             alert("Не достатньо коштів");
           }
+
       } 
         else {
           alert("Помилка! Значення має бути більше 0");
