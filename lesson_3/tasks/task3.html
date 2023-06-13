@@ -28,7 +28,7 @@
           } else {
             alert(`У вас є ще одна спроба`);
             let secondAttempt = parseInt(prompt("Вгадайте число", "2"));
-            if (isFinite(isFinite(firstAttempt))) {
+            if (isFinite(firstAttempt)) {
               if (secondAttempt >= 1 && secondAttempt <= 5) {
                 if (secondAttempt === randomNumber) {
                   alert(
