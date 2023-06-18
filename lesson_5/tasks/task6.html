@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 6</title>
+    <script>
+      // Задача 6. Вивести таблицю з 3 рядків і 7 стовпців
+
+      document.write("<table>");
+      for (let rowNum = 1; rowNum <= 3; rowNum++) {
+        document.write("<tr>");
+        for (let colNum = 1; colNum <= 7; colNum++) {
+          document.write(`<td>${colNum}</td>`);
+        }
+        document.write("</tr>");
+      }
+      document.write("</table>");
+    </script>
+    <head>
+      <html>
+        <body>
+          <div class="wrapper">
+            <header class="header"></header>
+            <main class="block">
+              <div class="block__task task">
+                <h2 class="tast__name">
+                  Задача 6. Вивести таблицю з 3 рядків і 7 стовпців
+                </h2>
+                <div class="task__result"></div>
+              </div>
+            </main>
+            <footer class="footer"></footer>
+          </div>
+        </body>
+      </html>
+    </head>
+  </head>
+</html>

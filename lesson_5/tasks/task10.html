@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 9</title>
+    <script>
+      // Задача 10. Користувач загадує число. За 3 спроби комп’ютер намагається вгадати число користувача (використати confirm).
+
+      let userNumber = parseInt(prompt("Введіть число з проміжку [1;10]", "3"));
+      const minNumber = 1;
+      const maxNumber = 10;
+      if (isFinite(userNumber)) {
+      } else {
+        alert("Помилка! Введіть числове значення");
+      }
+      if (userNumber <= maxNumber && userNumber >= minNumber) {
+      }
+
+      for (let attemptCount = 1; attemptCount <= 3; attemptCount++) {}
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 10. Користувач загадує число. За 3 спроби комп’ютер
+            намагається вгадати число користувача (використати confirm).
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

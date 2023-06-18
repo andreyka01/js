@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css">
+    <title>Task 2</title>
+    <script>
+      // Задача 2. Вивести на екран номери місяців весни і літа (від 3 до 8)
+
+      let monthName = '';
+
+      for (let monthCount = 3; monthCount <= 8; monthCount++) {
+        let currentMonth = monthCount;
+        switch (currentMonth) {
+          case 3: 
+            monthName += `${currentMonth} - Березень<br>`;
+          break;
+          case 4: 
+            monthName += `${currentMonth} - Квітень<br>`;
+          break;
+          case 5:
+            monthName += `${currentMonth} - Травень<br>`;
+          break;
+          case 6:
+            monthName += `${currentMonth} - Червень<br>`;
+          break;
+          case 7:
+            monthName += `${currentMonth} - Липень<br>`;
+          break;
+          case 8:
+            monthName += `${currentMonth} - Серпень<br>`;
+          break;
+        
+          default:
+            break;
+        }
+      }
+
+      document.write(monthName);
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 2. Вивести на екран номери місяців весни і літа (від 3 до 8)
+          </h2>
+          </div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
