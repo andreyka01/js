@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 11</title>
+    <script>
+      // Задача 11. Користувач загадує число. Комп’ютер задає питання поки не вгадає число користувача (використати confirm).
+
+      let userNumber = parseInt(
+        prompt("Загадайте число з проміжку [1;10]", "3")
+      );
+      const minNumber = 1;
+      const maxNumber = 10;
+
+      if (isFinite(userNumber)) {
+        if (userNumber <= maxNumber && userNumber >= minNumber) {
+          let computerAnswer;
+          let attemptCount = 1;
+
+          do {
+            let computerNumber =
+              minNumber +
+              Math.floor(Math.random() * (maxNumber - minNumber + 1));
+            computerAnswer = confirm(`Чи це число ${computerNumber}?`);
+
+            if (computerAnswer) {
+              alert(
+                `Комп’ютер вгадав використавши кількість спроб - ${attemptCount}`
+              );
+            } else {
+              alert("Комп’ютер спробує вгадати ще раз");
+              attemptCount++;
+            }
+          } while (!computerAnswer);
+        } else {
+          alert("Помилка! Введіть число з проміжку [1;10]");
+        }
+      } else {
+        alert("Помилка! Введіть числове значення");
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 11. Користувач загадує число. Комп’ютер задає питання поки не
+            вгадає число користувача (використати confirm).
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 13</title>
+    <script>
+      // Задача 13. Знайти суму 5 непарних чисел, що знаходяться між заданими користувачем числами.
+
+      const minNumber = parseInt(
+        prompt("Введіть мінімальне число проміжку", "1")
+      );
+      const maxNumber = parseInt(
+        prompt("Введіть максимальне число проміжку", "10")
+      );
+
+      if (isFinite(minNumber) && isFinite(maxNumber)) {
+        let diffNumbers = maxNumber - minNumber + 1;
+
+        if (Math.abs(diffNumbers) >= 9) {
+          let sumOddNumbers = 0;
+          let countOddNumbers = 1;
+          let currentNumber = minNumber;
+
+          for (currentNumber; currentNumber <= maxNumber; currentNumber++) {
+            if (currentNumber % 2 !== 0 && countOddNumbers <= 5) {
+              sumOddNumbers += currentNumber;
+              countOddNumbers++;
+            }
+          }
+
+          alert(
+            `Сума перших 5 непарних чисел проміжку [${minNumber};${maxNumber}] = ${sumOddNumbers}`
+          );
+        } else {
+          alert("Помилка! Цей діапазон не містить 5 непарних чисел");
+        }
+      } else {
+        alert("Помилка! Введіть числове значення");
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 13. Знайти суму 5 непарних чисел, що знаходяться між заданими
+            користувачем числами.
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

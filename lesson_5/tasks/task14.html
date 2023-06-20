@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 14</title>
+    <script>
+      // Задача 14.  Морський бій. Комп’ютер випадково розташовує одиночний корабель на полі розміром N*M. Маючи К снарядів користувач намагається потопити корабель.
+
+      const fieldWidth = parseInt(prompt("Введіть довжину поля", "9"));
+      const fieldHeight = parseInt(prompt("Введіть ширину поля", "9"));
+      let shellNumbers = parseInt(prompt("Введіть кількість снарядів", "3"));
+
+      if (
+        isFinite(fieldWidth) &&
+        isFinite(fieldHeight) &&
+        isFinite(shellNumbers)
+      ) {
+        const maxRow = fieldWidth;
+        const maxColumn = fieldHeight;
+        const minRow = 1;
+        const minColumn = 1;
+
+        let shipPositionRow =
+          minRow + Math.floor(Math.random() * (maxRow - minRow + 1));
+        let shipPositionColumn =
+          minColumn + Math.floor(Math.random() * (maxColumn - minColumn + 1));
+
+        console.log(
+          `Ряд = ${shipPositionRow}\nКолонка = ${shipPositionColumn}`
+        );
+
+        for (let currentShot = 1; currentShot <= shellNumbers; currentShot++) {
+          let userRow = parseInt(prompt("Введіть номер рядка", "1"));
+          let userColumn = parseInt(prompt("Введіть номер колонки", "1"));
+          if (isFinite(userRow) && isFinite(userColumn)) {
+            if (
+              userRow === shipPositionRow &&
+              userColumn === shipPositionColumn
+            ) {
+              alert("Вітаю! Ви потопили корабель!");
+              break;
+            } else {
+              alert(`Промах! Cнаряд ${currentShot}/${shellNumbers}`);
+              if (currentShot === shellNumbers) {
+                alert("Ви використали всі снаряди!");
+              }
+            }
+          } else {
+            alert("Помилка! Введіть числове значення");
+            break;
+          }
+        }
+      } else {
+        alert("Помилка! Введіть числове значення");
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 14. Морський бій. Комп’ютер випадково розташовує одиночний
+            корабель на полі розміром N*M. Маючи К снарядів користувач
+            намагається потопити корабель.
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
