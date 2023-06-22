@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 5</title>
+    <script>
+      // Задача 5. Інвестор вклав S тис. грн на 20 років під 20% річних. Визначити за допомогою циклів суму, яку він одержить (без оподаткування).
+
+      const userMoney = parseFloat(prompt("Введіть ваш вклад", "1000"));
+      const yearNumber = 20;
+      const percentNumber = 20;
+      let userSum = 0;
+      if (isFinite(userMoney)) {
+        for (let yearCount = 1; yearCount <= yearNumber; yearCount++) {
+          userSum += userMoney * Math.pow(1 + percentNumber / 100, 1);
+        }
+        alert(
+          `Вклавши ${userMoney.toFixed(2)} грн. ви отримаєте: ${userSum.toFixed(
+            2
+          )} грн.`
+        );
+      } else {
+        alert("Помилка! Введіть числове значення");
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 5. Інвестор вклав тис. грн на 20 років під 20% річних.
+            Визначити за допомогою циклів суму, яку він одержить (без
+            оподаткування).
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
