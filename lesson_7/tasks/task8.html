@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 8</title>
+    <script>
+      // Задача 8. Створити функцію, яка виводить банер (у функцію передаються: зображення,
+      // заголовок та посилання, куди переходимо при кліку на зображення (тег img повине знаходитись
+      // у середині тега a: <a> <img src=”шлях”> </a>
+
+      function creatingBanner(source, title, link) {
+        document.write(
+          `<a href="${link}" style="display:inline-block;position:relative;">`
+        );
+        document.write(`<img src="${source}" style="width:400px;"/>`);
+        document.write(
+          `<h1 style="color:#fff;position:absolute;top:10%;left:50%;transform:translate(-50%,0);">${title}</h1>`
+        );
+        document.write(`</a>`);
+      }
+
+      const imageSource = "../img/image-1.jpg";
+      const mainTitle = "Enjoy your life";
+      const link = "https://www.google.com/";
+
+      creatingBanner(imageSource, mainTitle, link);
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 8. Створити функцію, яка виводить банер (у функцію
+            передаються: зображення, заголовок та посилання, куди переходимо при
+            кліку на зображення (тег img повине знаходитись у середині тега a:
+            <xmp><a><img src="шлях"/></a></xmp>
+            <a href=""></a>
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
