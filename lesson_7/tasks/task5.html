@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 5</title>
+    <script>
+      // Задача 5. Створити окремі функції, які переводять: Сантиметри у
+      // дюйми; Кілограми у фунти; Кілометри у милі.
+
+      function getСentToInch(currentValue) {
+        return currentValue / 2.54;
+      }
+
+      function getKgToPound(currentValue) {
+        return currentValue * 2.205;
+      }
+
+      function getKilometerToMile(currentValue) {
+        return currentValue / 1.609;
+      }
+
+      let userCentimeters = parseFloat(prompt("Введіть сантиметри", "100"));
+      let userKilograms = parseFloat(prompt("Введіть кілограми", "50"));
+      let userKilometers = parseFloat(prompt("Введіть кілометри", "10"));
+
+      if (
+        isFinite(userCentimeters) &&
+        isFinite(userKilograms) &&
+        isFinite(userKilometers)
+      ) {
+        if (userCentimeters >= 0 && userKilograms >= 0 && userKilometers >= 0) {
+          let inchesValue = getСentToInch(userCentimeters);
+          let poundsValue = getKgToPound(userKilograms);
+          let milesValue = getKilometerToMile(userKilometers);
+
+          alert(
+            `Сантиметри: ${userCentimeters} Дюйми: ${inchesValue.toFixed(
+              3
+            )}\nКілограми: ${userKilograms} Фунти: ${poundsValue.toFixed(
+              3
+            )}\nКілометри: ${userKilometers} Милі: ${milesValue.toFixed(3)}`
+          );
+        } else {
+          alert("Помилка! Всі величини повинні бути більше нуля!");
+        }
+      } else {
+        alert("Помилка! Введіть числове значення!");
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 5. Створити окремі функції, які переводять: Сантиметри у
+            дюйми; Кілограми у фунти; Кілометри у милі.
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
