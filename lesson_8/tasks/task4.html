@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 4</title>
+    <script>
+      // Задача 4. Дано послідовність оцінок учня. Підрахувати кількість:
+      // 1) двійок
+      // 2) кількість хороших оцінок (добре, відмінно);
+      // 3) кількість оцінок, які нижче середнього.
+
+      function getStudentScores(countScores) {
+        let studentScore = [];
+
+        for (let i = 0; i < countScores; i++) {
+          let scoreValue = parseInt(prompt(`Введіть оцінку №${i + 1}`, "5"));
+          if (scoreValue >= 1 && scoreValue <= 5) {
+            studentScore.push(scoreValue);
+          } else {
+            alert("Помилка! Значення оцінки має бути в діапазоні [1; 5]");
+          }
+        }
+
+        return studentScore;
+      }
+
+      function getCountScoresValue2(studentScore) {
+        let count = 0;
+
+        for (let i = 0; i < studentScore.length; i++) {
+          if (studentScore[i] === 2) {
+            count++;
+          }
+        }
+
+        return count;
+      }
+
+      function getCountScoresGoodValue(studentScore) {
+        let count = 0;
+
+        for (let i = 0; i < studentScore.length; i++) {
+          if (studentScore[i] >= 4) {
+            count++;
+          }
+        }
+
+        return count;
+      }
+
+      function getAverageScore(studentScore) {
+        let sum = 0;
+
+        for (let i = 0; i < studentScore.length; i++) {
+          sum += studentScore[i];
+        }
+
+        return sum / studentScore.length;
+      }
+
+      function getCountLessThanAverageScore(average, studentScore) {
+        let count = 0;
+
+        for (let i = 0; i < studentScore.length; i++) {
+          if (studentScore[i] < average) {
+            count++;
+          }
+        }
+
+        return count;
+      }
+
+      let countScores = parseInt(prompt("Введіть кількість оцінок", "5"));
+      if (countScores > 0) {
+        let studentScores = getStudentScores(countScores);
+        let countScoresValue2 = getCountScoresValue2(studentScores);
+        let countScoresGoodValue = getCountScoresGoodValue(studentScores);
+        let averageScore = getAverageScore(studentScores);
+        let countScoresLessThatAverage = getCountLessThanAverageScore(
+          averageScore,
+          studentScores
+        );
+
+        document.write(`Оцінки студента: ${studentScores}<br>`);
+        document.write(`Кількість двійок: ${countScoresValue2}<br>`);
+        document.write(
+          `Кількість хороших оцінок (добре, відмінно): ${countScoresGoodValue}<br>`
+        );
+        document.write(`Середній бал: ${averageScore.toFixed(2)}<br>`);
+        document.write(
+          `Кількість оцінок, які нижче середнього: ${countScoresLessThatAverage}<br>`
+        );
+      } else {
+        alert("Помилка! Кількість оцінок повинна бути більша 0!");
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 4. Дано послідовність оцінок учня. Підрахувати кількість: 1)
+            двійок 2) кількість хороших оцінок (добре, відмінно); 3) кількість
+            оцінок, які нижче середнього.
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

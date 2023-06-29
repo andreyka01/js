@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 6</title>
+    <script>
+      // Задача 6. Морський бій.
+      // Користувач вводить кількість клітинок одновимірного масиву та кількість одиночних кораблів.
+      // Комп’ютер довільно розміщує ці одиночні кораблі у масиві по один у клітинці (якщо у клітинці 0, то клітинка пуста, якщо 1 – то це означає, що там є корабель.
+      // Користувач вводить номер клітинки, куди стріляє. Гра продовжується до тих пір, поки не будуть потоплені усі кораблі.
+
+      function creatingField(countCells, countShips) {
+        let fieldArray = [];
+        const minNumber = 0;
+        const maxNumber = countCells - 1;
+        for (let shipCount = 0; shipCount < countShips; shipCount++) {
+          let randomPosition;
+          do {
+            randomPosition =
+              minNumber +
+              Math.floor(Math.random() * (maxNumber - minNumber + 1));
+          } while (fieldArray[randomPosition] === 1);
+          fieldArray[randomPosition] = 1;
+          console.log(
+            `Random position #${shipCount + 1} is ${randomPosition}\n`
+          );
+          for (let i = 0; i < countCells; i++) {
+            if (isFinite(fieldArray[i]) && fieldArray[i] !== 0) {
+              fieldArray[i] = 1;
+            } else {
+              fieldArray[i] = 0;
+            }
+          }
+        }
+
+        console.log(fieldArray);
+        return fieldArray;
+      }
+
+      function getUserShot(fieldArray, countShips) {
+        do {
+          let userShot =
+            parseInt(
+              prompt(
+                `Введіть номер клітинки в діапазоні [1;${fieldArray.length}]`
+              )
+            ) - 1;
+          if (fieldArray[userShot] === 1) {
+            alert("Ви потопили корабель!");
+            fieldArray[userShot] = 0;
+            countShips--;
+            console.log(fieldArray);
+          } else {
+            alert("Промах!");
+          }
+        } while (countShips > 0);
+        alert("Вітаю! Ви потопили всі кораблі!");
+      }
+
+      let countCells = parseInt(prompt("Введіть кількість клітинок", "5"));
+      if (isFinite(countCells)) {
+        if (countCells > 0) {
+          let countShips = parseInt(
+            prompt("Введіть кількість одиночних кораблів", "3")
+          );
+          if (isFinite(countShips)) {
+            if (countShips > 0) {
+              if (countShips <= countCells) {
+                let fieldArray = creatingField(countCells, countShips);
+                getUserShot(fieldArray, countShips);
+              } else {
+                alert(
+                  "Помилка! Кількість кораблів має бути менше або дорівнювати кількості клітинок!"
+                );
+              }
+            } else {
+              alert("Помилка! Кілкьість одиночних кораблів має бути більше 0!");
+            }
+          } else {
+            alert("Помилка! Введіть числове значення!");
+          }
+        } else {
+          alert("Помилка! Кілкьість клітинок має бути більше 0!");
+        }
+      } else {
+        alert("Помилка! Введіть числове значення!");
+      }
+    </script>
+    <head>
+      <html>
+        <body>
+          <div class="wrapper">
+            <header class="header"></header>
+            <main class="block">
+              <div class="block__task task">
+                <h2 class="tast__name">
+                  Задача 6. Морський бій. Користувач вводить кількість клітинок
+                  одновимірного масиву та кількість одиночних кораблів.
+                  Комп’ютер довільно розміщує ці одиночні кораблі у масиві по
+                  один у клітинці (якщо у клітинці 0, то клітинка пуста, якщо 1
+                  – то це означає, що там є корабель. Користувач вводить номер
+                  клітинки, куди стріляє. Гра продовжується до тих пір, поки не
+                  будуть потоплені усі кораблі.
+                </h2>
+                <div class="task__result"></div>
+              </div>
+            </main>
+            <footer class="footer"></footer>
+          </div>
+        </body>
+      </html>
+    </head>
+  </head>
+</html>

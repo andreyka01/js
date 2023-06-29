@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 3</title>
+    <script>
+      // Задача 3. Дано масив імен учнів. З’ясувати скільки разів зустрічається ім’я «Іван».
+
+      function getStudentsName(countStudents) {
+        let studentsName = [];
+
+        for (let i = 0; i < countStudents; i++) {
+          let studentName = prompt(`Введіть ім’я ${i + 1}-го учня`, "Іван");
+          studentsName.push(studentName);
+        }
+
+        return studentsName;
+      }
+
+      function getCountSpecificName(studentsName) {
+        let count = 0;
+
+        for (let i = 0; i < studentsName.length; i++) {
+          if (studentsName[i] === "Іван") {
+            count++;
+          }
+        }
+
+        return count;
+      }
+
+      let countStudents = parseInt(prompt("Введіть кількість учнів", "5"));
+      if (countStudents > 0) {
+        let studentsName = getStudentsName(countStudents);
+        let countIvanName = getCountSpecificName(studentsName);
+
+        document.write(`Імена учнів: ${studentsName}<br>`);
+        document.write(`Кількість учнів з іменем "Іван": ${countIvanName}<br>`);
+      } else {
+        alert("Помилка! Кількість учнів повинна бути більша 0!");
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 3. Дано масив імен учнів. З’ясувати скільки разів
+            зустрічається ім’я «Іван».
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

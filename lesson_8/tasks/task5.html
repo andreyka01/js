@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 5</title>
+    <script>
+      // Задача 5. Дано послідовність цін товарів та назв (у окремих масивах).
+      // Вивести на екран ті, які може собі дозволити користувач (кількість грошей задається).
+      function getProductsPrice(countProduct) {
+        let productsPrice = [];
+
+        for (let i = 0; i < countProduct; i++) {
+          let priceValue = parseFloat(
+            prompt(`Введіть вартість ${i + 1}-го товару`)
+          );
+          if (priceValue > 0) {
+            productsPrice.push(priceValue);
+          } else {
+            alert("Помилка! Ціна товару має бути більше 0!");
+          }
+        }
+
+        return productsPrice;
+      }
+
+      function getProductsName(countProduct) {
+        let productsName = [];
+
+        for (let i = 0; i < countProduct; i++) {
+          let nameValue = prompt(`Введіть назву ${i + 1}-го товару`);
+          productsName.push(nameValue);
+        }
+
+        return productsName;
+      }
+
+      function getListToUser(productsPrice, productsName, userMoney) {
+        let result = "";
+        for (let i = 0; i < productsName.length; i++) {
+          if (userMoney >= productsPrice[i]) {
+            result += `Ви можете купити: ${productsName[i]} за ціною ${productsPrice[i]}<br>`;
+          } else {
+            alert("Недостатньо коштів!");
+          }
+        }
+
+        return result;
+      }
+
+      let countProduct = parseInt(prompt("Введіть кількість товарів", "5"));
+      let productsPrice = getProductsPrice(countProduct);
+      let productsName = getProductsName(countProduct);
+      let userMoney = parseFloat(prompt("Введіть кількість грошей", "100"));
+      let productList = getListToUser(productsPrice, productsName, userMoney);
+
+      document.write(productList);
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 5. Дано послідовність цін товарів та назв (у окремих
+            масивах). Вивести на екран ті, які може собі дозволити користувач
+            (кількість грошей задається).
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

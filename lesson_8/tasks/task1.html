@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 1</title>
+    <script>
+      // Задача 1. Дано масив, який містить оцінки з К предметів.
+      // Знайти середній бал і з’ясувати до якої категорії він відноситься
+      // (відмінник, двійочник (має хоча би одну двійку), хорошист (оцінки добре і відмінно), трійочник(є хоча би одна трійка)).
+      // [5, 5, 5, 5, 3]
+      //
+
+      function getStudentScore(countSubjects) {
+        let studentScore = [];
+
+        for (let i = 0; i < countSubjects; i++) {
+          let scoreValue = parseInt(prompt(`Введіть оцінку №${i + 1}`));
+          studentScore.push(scoreValue);
+        }
+
+        return studentScore;
+      }
+
+      function getAverageScore(studentMarks) {
+        let sumScore = 0;
+
+        for (let i = 0; i < studentMarks.length; i++) {
+          sumScore += studentMarks[i];
+        }
+
+        return sumScore / studentMarks.length;
+      }
+
+      function getMinScore(studentMarks) {
+        let minScore = +Infinity;
+
+        for (let i = 0; i < studentMarks.length; i++) {
+          if (minScore > studentMarks[i]) {
+            minScore = studentMarks[i];
+          }
+        }
+
+        return minScore;
+      }
+
+      function getStudentStatus(minMark) {
+        let studentStatus;
+
+        switch (minMark) {
+          case 5:
+            studentStatus = "Відмінник";
+            break;
+          case 4:
+            studentStatus = "Хорошист";
+            break;
+          case 3:
+            studentStatus = "Трійочник";
+            break;
+          case 2:
+            studentStatus = "Двійочник";
+            break;
+        }
+
+        return studentStatus;
+      }
+
+      let countSubjects = parseInt(prompt("Введіть кількість предметів", "5"));
+      let studentsMarks = getStudentScore(countSubjects);
+      let averageMark = getAverageScore(studentsMarks);
+      let minMark = getMinScore(studentsMarks);
+      let studentStatus = getStudentStatus(minMark);
+
+      alert(
+        `Студент з середнім балом ${averageMark.toFixed(2)} - ${studentStatus}`
+      );
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 1. Дано масив, який містить оцінки з К предметів. Знайти
+            середній бал і з’ясувати до якої категорії він відноситься
+            (відмінник, двійочник (має хоча би одну двійку), хорошист (оцінки
+            добре і відмінно), трійочник(є хоча би одна трійка)).
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
