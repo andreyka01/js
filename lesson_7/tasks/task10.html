@@ -9,46 +9,70 @@
     <script>
       // Задача 10. Дано покази температур (довільна кількість). Розробити функцію, яка дозволить знайти середнє значення для додатних показів температури.
 
-      function getAveragePositiveTemperature(sumTemp, countTemp) {
-        return sumTemp / countTemp;
+      function getAveragePositiveTemperature() {
+        let sum = 0;
+        let count = 0;
+        for (let i = 0; i < arguments.length; i++) {
+          if (arguments[i] > 0) {
+            sum += arguments[i];
+            count++;
+          }
+        }
+
+        return sum / count;
       }
 
-      let userCount = parseInt(
-        prompt("Введіть кількість показників температур", "5")
+      let averagePositiveTemperature = getAveragePositiveTemperature(
+        10,
+        20,
+        -10,
+        -20,
+        30
       );
-      if (isFinite(userCount)) {
-        if (userCount > 0) {
-          let currentTemperature,
-            sumPositiveTemperature = 0,
-            countPositive = 0;
-          for (let i = 1; i <= userCount; i++) {
-            currentTemperature = parseFloat(
-              prompt(`Введіть показники ${i} температури`, "20")
-            );
-            if (currentTemperature >= 0) {
-              sumPositiveTemperature += currentTemperature;
-              countPositive++;
-            }
-          }
-          let averageValue = getAveragePositiveTemperature(
-            sumPositiveTemperature,
-            countPositive
-          );
-          if (countPositive !== 0) {
-            alert(
-              `Cереднє значення для додатних показів температури: ${averageValue}`
-            );
-          } else {
-            alert("Ви не ввели додтню температуру!");
-          }
-        } else {
-          alert(
-            "Помилка! Кілкьість показників температур повинна бути більша 0"
-          );
-        }
-      } else {
-        alert("Помилка! Введіть числвое значення!");
-      }
+      alert(
+        `Cереднє значення для додатних показів температури: ${averagePositiveTemperature}`
+      );
+
+      // function getAveragePositiveTemperature(sumPositiveTemp, countPositiveTempt) {
+      //   return sumPositiveTemp / countPositiveTempt;
+      // }
+
+      // let userCount = parseInt(
+      //   prompt("Введіть кількість показників температур", "5")
+      // );
+      // if (isFinite(userCount)) {
+      //   if (userCount > 0) {
+      //     let currentTemperature,
+      //       sumPositiveTemperature = 0,
+      //       countPositive = 0;
+      //     for (let i = 1; i <= userCount; i++) {
+      //       currentTemperature = parseFloat(
+      //         prompt(`Введіть показники ${i} температури`, "20")
+      //       );
+      //       if (currentTemperature >= 0) {
+      //         sumPositiveTemperature += currentTemperature;
+      //         countPositive++;
+      //       }
+      //     }
+      //     let averageValue = getAveragePositiveTemperature(
+      //       sumPositiveTemperature,
+      //       countPositive
+      //     );
+      //     if (countPositive !== 0) {
+      //       alert(
+      //         `Cереднє значення для додатних показів температури: ${averageValue}`
+      //       );
+      //     } else {
+      //       alert("Ви не ввели додтню температуру!");
+      //     }
+      //   } else {
+      //     alert(
+      //       "Помилка! Кілкьість показників температур повинна бути більша 0"
+      //     );
+      //   }
+      // } else {
+      //   alert("Помилка! Введіть числвое значення!");
+      // }
     </script>
   </head>
   <body>
