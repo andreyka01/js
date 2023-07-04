@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 8</title>
+    <script>
+      // Задача 8. Дано масив номерів авто. Сформувати новий масив тих, які починаються на «А»
+
+      function creatingNewArray(carNumbers) {
+        let newCarNumbers = [];
+
+        carNumbers.forEach((element, index, array) => {
+          if (element[0] === "A") {
+            newCarNumbers.push(element);
+          }
+        });
+
+        return newCarNumbers;
+      }
+
+      let carNumbers = [
+        "AA2303OD",
+        "BM1945AD",
+        "AA7733DK",
+        "KC6646BL",
+        "AI7003CD",
+        "OK5544NO",
+      ];
+
+      let carNumbersStartWithA = creatingNewArray(carNumbers);
+
+      document.write(`carNumbers = [${carNumbers}]<br>`);
+      document.write(`carNumbersStartWithA = [${carNumbersStartWithA}]<br>`);
+    </script>
+    <head>
+      <html>
+        <body>
+          <div class="wrapper">
+            <header class="header"></header>
+            <main class="block">
+              <div class="block__task task">
+                <h2 class="tast__name">
+                  Задача 8. Дано масив номерів авто. Сформувати новий масив тих,
+                  які починаються на «А»
+                </h2>
+                <div class="task__result"></div>
+              </div>
+            </main>
+            <footer class="footer"></footer>
+          </div>
+        </body>
+      </html>
+    </head>
+  </head>
+</html>

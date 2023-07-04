@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 7</title>
+    <script>
+      // Задача 7. Дано масив цін. Змінити цей масив так, що на ціни товарів,
+      // які більші за 1000 грн. дати 30% знижки.
+
+      function creatingArray(elementsNumber) {
+        let arr = new Array(elementsNumber);
+
+        for (let i = 0; i < arr.length; i++) {
+          let userValue = parseFloat(
+            prompt(`Введіть ${i + 1}-ий елемент масиву`, "4")
+          ).toFixed(2);
+          arr.fill(userValue, i, i + 1);
+        }
+
+        return arr;
+      }
+
+      function getChangedArray(arr) {
+        const discountValuePercent = 30;
+        arr.forEach((element, index, arr) => {
+          if (element > 1000) {
+            let discountValue = (element * discountValuePercent) / 100;
+            arr[index] = (element - discountValue).toFixed(2);
+          }
+        });
+
+        return arr;
+      }
+
+      let elementsNumber = parseInt(
+        prompt("Введіть кількість елементів масиву", "4")
+      );
+      if (isFinite(elementsNumber)) {
+        if (elementsNumber > 0) {
+          let prices = creatingArray(elementsNumber);
+          document.write(`prices = [${prices}]<br>`);
+          prices = getChangedArray(prices);
+          document.write(`prices = [${prices}]<br>`);
+        } else
+          throw new Error(
+            "Помилка! Кількість елементів повинна бути більше 0!"
+          );
+      } else throw new Error("Помилка! Введіть числове значення!");
+    </script>
+    <head>
+      <html>
+        <body>
+          <div class="wrapper">
+            <header class="header"></header>
+            <main class="block">
+              <div class="block__task task">
+                <h2 class="tast__name">
+                  Задача 7. Дано масив цін. Змінити цей масив так, що на ціни
+                  товарів, які більші за 1000 грн. дати 30% знижки.
+                </h2>
+                <div class="task__result"></div>
+              </div>
+            </main>
+            <footer class="footer"></footer>
+          </div>
+        </body>
+      </html>
+    </head>
+  </head>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 5</title>
+    <script>
+      // Задача 5. Дано масив елементів. Знайти добуток додатних елементів
+      function creatingArray(elementsNumber) {
+        let arr = new Array(elementsNumber);
+
+        for (let i = 0; i < arr.length; i++) {
+          let userValue = parseInt(
+            prompt(`Введіть ${i + 1}-ий елемент масиву`, "4")
+          );
+          arr.fill(userValue, i, i + 1);
+        }
+
+        return arr;
+      }
+
+      function getPositiveElementsProduct(arr) {
+        let product = 1;
+        for (const item of arr) {
+          if (item > 0) {
+            product *= item;
+          }
+        }
+
+        return product;
+      }
+
+      let elementsNumber = parseInt(
+        prompt("Введіть кількість елементів масиву", "4")
+      );
+      if (isFinite(elementsNumber)) {
+        if (elementsNumber > 0) {
+          let arr = creatingArray(elementsNumber);
+          let positiveElementsProduct = getPositiveElementsProduct(arr);
+          document.write(`arr = [${arr}]<br>`);
+          document.write(
+            `Добуток додатніх елементів масива: ${positiveElementsProduct}`
+          );
+        } else
+          throw new Error(
+            "Помилка! Кількість елементів повинна бути більше 0!"
+          );
+      } else throw new Error("Помилка! Введіть числове значення!");
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 5. Дано масив елементів. Знайти добуток додатних елементів
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

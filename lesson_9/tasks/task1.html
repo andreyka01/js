@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 1</title>
+    <script>
+      // Користувач вводить кількість елементів. Створити масив, що складається з вказаної кількості елементів заповнених нулями.
+
+      function creatingArray(elementsNumber) {
+        let arr = new Array(elementsNumber).fill(0, 0);
+        return arr;
+      }
+
+      let elementsNumber = parseInt(
+        prompt("Введіть кількість елементів масиву", "4")
+      );
+      if (isFinite(elementsNumber)) {
+        if (elementsNumber > 0) {
+          let arr = creatingArray(elementsNumber);
+          document.write(`arr = [${arr}]`);
+        } else
+          throw new Error(
+            "Помилка! Кількість елементів повинна бути більше 0!"
+          );
+      } else throw new Error("Помилка! Введіть числове значення!");
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 1. Користувач вводить кількість елементів. Створити масив, що
+            складається з вказаної кількості елементів заповнених нулями.
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
