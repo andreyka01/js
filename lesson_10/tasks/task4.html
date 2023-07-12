@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 4</title>
+    <script>
+      // Задача 4. Сформувати новий масив, що міститиме значення цін у відсотках стосовно максимального
+
+      function getArrayWithRandomValue(length, minValue, MaxValue) {
+        let arr = [];
+        for (let i = 0; i < length; i++) {
+          let element =
+            minValue + Math.floor(Math.random() * (MaxValue - minValue + 1));
+          arr.push(element);
+        }
+        return arr;
+      }
+
+      let userPeriod = parseInt(prompt("Введіть кількість днів", "4"));
+      if (isFinite(userPeriod)) {
+        if (userPeriod > 0) {
+          const minValue = 1;
+          const maxValue = 10000;
+          let pricesHistory = getArrayWithRandomValue(
+            userPeriod,
+            minValue,
+            maxValue
+          );
+          document.write(`Array = [${pricesHistory}]<br>`);
+
+          let maxElement = pricesHistory.reduce((prevValue, element) =>
+            element > prevValue ? element : prevValue
+          );
+          console.log(`Max = ${maxElement}`);
+
+          let percentArr = pricesHistory.map(
+            (element) => (element / maxElement) * 100
+          );
+          let newArr = percentArr.map((element) => element.toFixed(2));
+
+          document.write(`New Array = [${newArr}]`);
+        } else {
+          throw new Error("Помилка! Значення має бути більше 0");
+        }
+      } else {
+        throw new Error("Помилка! Введіть числове значення!");
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 4. Сформувати новий масив, що міститиме значення цін у
+            відсотках стосовно максимального
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
