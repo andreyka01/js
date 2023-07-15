@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 1</title>
+    <script>
+      // Знайти суми елементів у вказаній області (масиви розділені на 4 рівні частини -  не звертаємо увагу на криві малюнки ☺ )
+
+      function getArrayWithRandomValue(length, minValue, MaxValue) {
+        let arr = [];
+        for (let i = 0; i < length; i++) {
+          let element =
+            minValue + Math.floor(Math.random() * (MaxValue - minValue + 1));
+          arr.push(element);
+        }
+        return arr;
+      }
+
+      function getTable(length, minValue, maxValue) {
+        let table = [];
+        for (let i = 0; i < length; i++) {
+          let element = getArrayWithRandomValue(length, minValue, maxValue);
+          table.push(element);
+        }
+
+        return table;
+      }
+
+      function printTable(table) {
+        document.write("<table>");
+        for (let rowNumber = 0; rowNumber < table.length; rowNumber++) {
+          document.write("<tr>");
+          for (
+            let columnNumber = 0;
+            columnNumber < table.length;
+            columnNumber++
+          ) {
+            document.write(`<td>${table[rowNumber][columnNumber]}</td>`);
+          }
+          document.write("</tr>");
+        }
+        document.write("</table>");
+      }
+
+      function getSumTableQuarters(table, quarterNumber) {
+        let startRowsValue, endRowsValue, startColumnValue, endColumnValue;
+        let sum = 0;
+
+        switch (quarterNumber) {
+          case 1:
+            startRowsValue = 0;
+            endRowsValue = Math.floor(table.length / 2);
+            startColumnValue = Math.floor(table.length / 2);
+            endColumnValue = table.length;
+            break;
+          case 2:
+            startRowsValue = 0;
+            endRowsValue = Math.floor(table.length / 2);
+            startColumnValue = 0;
+            endColumnValue = Math.floor(table.length / 2);
+            break;
+          case 3:
+            startRowsValue = Math.floor(table.length / 2);
+            endRowsValue = table.length;
+            startColumnValue = 0;
+            endColumnValue = Math.floor(table.length / 2);
+            break;
+          case 4:
+            startRowsValue = Math.floor(table.length / 2);
+            endRowsValue = table.length;
+            startColumnValue = Math.floor(table.length / 2);
+            endColumnValue = table.length;
+            break;
+        }
+
+        for (
+          let rowsNumber = startRowsValue;
+          rowsNumber < endRowsValue;
+          rowsNumber++
+        ) {
+          for (
+            let columnNumber = startColumnValue;
+            columnNumber < endColumnValue;
+            columnNumber++
+          ) {
+            sum += table[rowsNumber][columnNumber];
+          }
+        }
+
+        return sum;
+      }
+
+      function getSumEvenRows(table) {
+        let sum = 0;
+        for (let rowsNumber = 0; rowsNumber < table.length; rowsNumber += 2) {
+          for (
+            let columnNumber = 0;
+            columnNumber < table.length;
+            columnNumber++
+          ) {
+            sum += table[rowsNumber][columnNumber];
+          }
+        }
+
+        return sum;
+      }
+
+      function getSumOddColumns(table) {
+        let sum = 0;
+        for (let rowsNumber = 0; rowsNumber < table.length; rowsNumber++) {
+          for (
+            let columnNumber = 1;
+            columnNumber < table.length;
+            columnNumber += 2
+          ) {
+            sum += table[rowsNumber][columnNumber];
+          }
+        }
+
+        return sum;
+      }
+
+      function getSumEvenRowsOddColumnsAndViceVersa(table) {
+        let sum1 = 0;
+        let sum2 = 0;
+        for (let rowsNumber = 0; rowsNumber < table.length; rowsNumber++) {
+          for (
+            let columnNumber = 0;
+            columnNumber < table.length;
+            columnNumber++
+          ) {
+            if (rowsNumber % 2 === 0 && columnNumber % 2 !== 0) {
+              sum1 += table[rowsNumber][columnNumber];
+            } else {
+              sum2 += table[rowsNumber][columnNumber];
+            }
+          }
+        }
+
+        return [sum1, sum2];
+      }
+
+      let userLength = parseInt(
+        prompt("Введіть розмір багатовимірного масиву", "4")
+      );
+      if (isFinite(userLength)) {
+        if (userLength > 1) {
+          const minValue = 1;
+          const maxValue = 10;
+          let table = getTable(userLength, minValue, maxValue);
+          printTable(table);
+
+          let sumFirstQuarter = getSumTableQuarters(table, 1);
+          document.write(`1) Перша чверть: Sum = ${sumFirstQuarter}<br>`);
+
+          let sumSecondQuarter = getSumTableQuarters(table, 2);
+          document.write(`2) Друга чверть: Sum = ${sumSecondQuarter}<br>`);
+
+          let sumThirdQuarter = getSumTableQuarters(table, 3);
+          document.write(`3) Третя чверть: Sum = ${sumThirdQuarter}<br>`);
+
+          let sumFourthQuarter = getSumTableQuarters(table, 4);
+          document.write(`4) Четверта чверть: Sum = ${sumFourthQuarter}<br>`);
+
+          let sumEvenRows = getSumEvenRows(table);
+          document.write(`5) Сума парни рядків: Sum = ${sumEvenRows}<br>`);
+
+          let sumOddColumns = getSumOddColumns(table);
+          document.write(
+            `6) Сума непарних стовпців: Sum = ${sumOddColumns}<br>`
+          );
+
+          let sumEvenRowsOddColumnsAndViceVersa =
+            getSumEvenRowsOddColumnsAndViceVersa(table);
+          document.write(
+            `7) У парних рядках – непарні стовпці: Sum = ${sumEvenRowsOddColumnsAndViceVersa[0]}<br> У непарних – парні: Sum = ${sumEvenRowsOddColumnsAndViceVersa[1]}`
+          );
+        } else {
+          throw new Error(
+            "Помилка! Розмір багатовимірного масиву має бути більше 1"
+          );
+        }
+      } else {
+        throw new Error("Помилка! Введіть числове значення!");
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 1. Знайти суми елементів у вказаній області (масиви розділені
+            на 4 рівні частини - не звертаємо увагу на криві малюнки ☺ )
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

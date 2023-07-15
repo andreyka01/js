@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 3</title>
+    <script>
+      // Задача 3. Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів. Користувач стріляє вказуючи координати. Гра продовжується поки не потоплено усі кораблі або у користувача не закінчаться снаряди.
+
+      function generateField(rowsNumber, columnNumber) {
+        let field = [];
+        for (let rowsCount = 0; rowsCount < rowsNumber; rowsCount++)
+          field.push(new Array(columnNumber).fill(0));
+
+        return field;
+      }
+
+      function generateRandomShipsPosition(
+        shipsCount,
+        field,
+        rowsNumber,
+        columnNumber
+      ) {
+        for (let shipNumber = 0; shipNumber < shipsCount; ) {
+          let randomRowPosition = Math.floor(Math.random() * rowsNumber);
+          let randomColumnPosition = Math.floor(Math.random() * columnNumber);
+
+          if (field[randomRowPosition][randomColumnPosition] !== 1) {
+            shipNumber++;
+            field[randomRowPosition][randomColumnPosition] = 1;
+          }
+        }
+
+        return field;
+      }
+
+      function gameActions(userShellsCount, shipsCount, field) {
+        do {
+          console.log(field.flat(Infinity));
+          let userRowNumber =
+            parseInt(prompt("Введіть номер рядка [1-6]", "1")) - 1;
+          let userColumnNumber =
+            parseInt(prompt("Введіть номер колонки [1-6]", "1")) - 1;
+
+          if (field[userRowNumber][userColumnNumber] === 1) {
+            field[userRowNumber][userColumnNumber] = 0;
+            shipsCount--;
+            userShells--;
+            alert(
+              `Ви потопили корабель!\nКораблів: ${shipsCount}\nСнарядів: ${userShells}`
+            );
+          } else {
+            userShells--;
+
+            if (userShells < shipsCount) {
+              alert(
+                `Кількість снарядів (${userShells}) менша за кількість кораблів (${shipsCount})!\nВи програли!`
+              );
+              break;
+            }
+            alert(`Промах! У вас залишилось кількість снарядів: ${userShells}`);
+          }
+        } while (shipsCount > 0 && userShells > 0);
+
+        if (shipsCount === 0) {
+          alert("Вітаю! Ви збили всі кораблі!");
+        }
+
+        if (userShells === 0) {
+          alert("У вас не залишилось снарядів! Ви програли!");
+        }
+      }
+
+      let userShells = parseInt(prompt("Введіть кількість снарядів", "6"));
+      if (isFinite(userShells)) {
+        if (userShells > 0) {
+          const rowsNumber = 6;
+          const columnsNumber = 6;
+          let initialPlayingField = generateField(rowsNumber, columnsNumber);
+          let shipsNumber;
+
+          do {
+            shipsNumber = parseInt(prompt("Введіть кількість кораблів", "5"));
+            userShells < shipsNumber
+              ? alert(
+                  `Кількість кораблів має бути менше чи дорівнювати кількості снарядів!`
+                )
+              : "";
+          } while (userShells < shipsNumber);
+
+          if (isFinite(shipsNumber)) {
+            if (shipsNumber > 0) {
+              if (shipsNumber <= rowsNumber * columnsNumber) {
+                let playingField = generateRandomShipsPosition(
+                  shipsNumber,
+                  initialPlayingField,
+                  rowsNumber,
+                  columnsNumber
+                );
+
+                gameActions(userShells, shipsNumber, playingField);
+              } else {
+                throw new Error(
+                  "Помилка! Кількість кораблів має бути менше кількості клітинок на полі!"
+                );
+              }
+            } else {
+              throw new Error("Помилка! Значення має бути більше 0");
+            }
+          } else {
+            throw new Error("Помилка! Введіть числове значення!");
+          }
+        } else {
+          throw new Error("Помилка! Значення має бути більше 0");
+        }
+      } else {
+        throw new Error("Помилка! Введіть числове значення!");
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 3. Морський бій. Випадковим чином на двовимірному полі
+            розміром 6*6 розташовується 5 кораблів. Користувач стріляє вказуючи
+            координати. Гра продовжується поки не потоплено усі кораблі або у
+            користувача не закінчаться снаряди.
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

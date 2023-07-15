@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css">
+    <title>Task 2</title>
+    <script>
+      // Задача 2. Дано інформацію про прибуток К магазинів протягом тижня. Знайти :
+      // 1) загальний прибуток кожного масиву за тиждень;
+      // 2) загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за вівторок, і т.д.);
+      // 3) загальний прибуток за робочі дні
+      // 4) загальний прибуток за вихідні дні
+      // 5) максимальний прибуток за середу
+
+      function getArrayWithRandomValue(length, minValue, MaxValue) {
+        let arr = [];
+        for (let i = 0; i < length; i++) {
+          let element =
+            minValue + Math.floor(Math.random() * (MaxValue - minValue + 1));
+          arr.push(element);
+        }
+        return arr;
+      }
+
+      function getTable(lengthTable, lengthRow, minValue, MaxValue,) {
+        let table = [];
+        for (let i = 0; i < lengthTable; i++) {
+          let element = getArrayWithRandomValue(lengthRow, minValue, MaxValue);
+          table.push(element);
+        }
+
+        return table;
+      }
+
+      function printTable(table) {
+        document.write("<table>");
+        for (let rowNumber = 0; rowNumber < table.length; rowNumber++) {
+          document.write("<tr>");
+          for (
+            let columnNumber = 0;
+            columnNumber < table[rowNumber].length;
+            columnNumber++
+          ) {
+            document.write(`<td>${table[rowNumber][columnNumber]}</td>`);
+          }
+          document.write("</tr>");
+        }
+        document.write("</table>");
+      }
+
+      // 1) Функція для знаходження загальнього прибутку кожного магазину за тиждень;
+
+      function getSumEachStoresForWeek(stores) {
+        let storesProfitForWeek = [];
+
+        for (let currentStore = 0; currentStore < stores.length; currentStore++) {
+          let sum = 0;
+          for (let currentDay = 0; currentDay < stores[currentStore].length; currentDay++) {
+            sum += stores[currentStore][currentDay];
+          }          
+          storesProfitForWeek.push(sum)
+        }
+
+        return storesProfitForWeek;
+      }
+
+      // 2) Функція для знаходження загальнього прибутку усіх магазинів по дням;
+
+      function getSumAllStoresForDays(stores) {
+        let sumEachStoresForDays = new Array(7).fill(0);
+        for (let currentStore = 0; currentStore < stores.length; currentStore++) {
+          for (let currentDay = 0; currentDay < stores[currentStore].length; currentDay++) {
+            sumEachStoresForDays[currentDay] += stores[currentStore][currentDay];
+          }          
+        }
+
+        return sumEachStoresForDays;
+      }
+
+      // 3) Функція для знаходження загальнього прибутку кожного магазину за робочі дні
+
+      function getSumEachStoresForWordDays(stores) {
+        let storesProfitForWordDays = [];
+
+        for (let currentStore = 0; currentStore < stores.length; currentStore++) {
+          let sum = 0;
+          for (let currentDay = 0; currentDay < 5; currentDay++) {
+            sum += stores[currentStore][currentDay];
+          }          
+          storesProfitForWordDays.push(sum)
+        }
+
+        return storesProfitForWordDays;
+      }
+
+      // 4) Функція для знаходження загальнього прибутку усіх магазинів за вихідні дні
+
+      function getSumAllStoresForWeekDays(stores) {
+        let sumAllStoresForWeekDays = 0;
+
+        for (let currentStore = 0; currentStore < stores.length; currentStore++) {
+          for (let currentDay = 5; currentDay < 7; currentDay++) {
+            sumAllStoresForWeekDays += stores[currentStore][currentDay];
+          }          
+        }
+
+        return sumAllStoresForWeekDays;
+      }
+
+      // 5) Функція для знаходження максимального прибутку за середу
+
+      function getMaxProfitForWednesday(stores) {
+        let maxForWednesday = -Infinity;
+        const wednesdayNumber = 2
+
+        for (let currentStore = 0; currentStore < stores.length; currentStore++) {
+            if(maxForWednesday < stores[currentStore][wednesdayNumber]) 
+              maxForWednesday = stores[currentStore][wednesdayNumber];
+        }
+        
+        return maxForWednesday;
+      }
+
+      // 7) Функція для отримання відсортованих елементів за кожен тиждень за зростанням
+
+      function getSortedArrayByAscending(stores) {
+        for (let currentStore = 0; currentStore < stores.length; currentStore++) {
+          stores[currentStore].sort((price1, price2) => price1 - price2);
+        }
+
+        return stores;
+      }
+
+      
+      let userLength = parseInt(prompt("Введіть кількість магазинів", "4"));
+      
+      if (isFinite(userLength)) {
+        if (userLength > 0) {
+          const minValue = 1;
+          const maxValue = 1000;
+          const daysInWeek = 7;
+          let storesProfit = getTable(userLength, daysInWeek, minValue, maxValue);
+          printTable(storesProfit);
+
+          let sumEachStoresForWeek = getSumEachStoresForWeek(storesProfit);
+          document.write(`1) Загальний прибуток кожного магазину за тиждень: ${sumEachStoresForWeek}<br>`);
+
+          let sumAllStoresForDays = getSumAllStoresForDays(storesProfit);
+          document.write(`2) Загальний прибуток усіх магазинів по дням: ${sumAllStoresForDays}<br>`);
+
+          let sumEachStoresForWordDays = getSumEachStoresForWordDays(storesProfit);
+          document.write(`3) Загальний прибуток кожного магазину за робочі дні: ${sumEachStoresForWordDays}<br>`);
+
+          let sumEachStoresForWeekDays = getSumAllStoresForWeekDays(storesProfit);
+          document.write(`4) Загальний прибуток усіх магазинів за вихідні дні: ${sumEachStoresForWeekDays}<br>`);
+
+          let maxProfitForWednesday = getMaxProfitForWednesday(storesProfit);
+          document.write(`5) Максимальний прибуток за середу: ${maxProfitForWednesday}<br>`);
+          
+          // Сформувати загальний список (одновимірний масив) зі значенням, які що більші за 200
+
+          let storesProfitMoreThan200 = storesProfit.flat(Infinity).filter(price => price > 200)
+          document.write(`6) Cформувати загальний список (одновимірний масив) зі значенням, які більші за 200 : ${storesProfitMoreThan200}<br>`);
+          
+          document.write('7) Відсортувати кожен тиждень за зростанням <br>');
+          printTable(getSortedArrayByAscending(storesProfit));
+        } else {
+          throw new Error("Помилка! Значення має бути більше 0");
+        }
+      } else {
+        throw new Error("Помилка! Введіть числове значення!");
+      }
+      
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 2. Дано інформацію про прибуток К магазинів протягом тижня. Знайти :
+            1) загальний прибуток кожного масиву за тиждень;
+            2) загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за вівторок, і т.д.);
+            3) загальний прибуток за робочі дні
+            4) загальний прибуток за вихідні дні
+            5) максимальний прибуток за середу       
+          </h2>
+          </div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
