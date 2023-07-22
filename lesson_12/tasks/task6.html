@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 6</title>
+    <script>
+      // Задача 6. Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я довжиною 5 символів і під яким індексом.
+      let userNames = [
+        "Ivan",
+        "Andrew",
+        "John",
+        "Mike",
+        "Bob",
+        "Olga",
+        "David",
+        "Adam",
+      ];
+
+      document.write(`userNames = [${userNames}]<br>`);
+
+      userNames.sort();
+      console.log(userNames);
+
+      function binarySearchIndex(array, searchElementLength) {
+        let start = 0;
+        let end = array.length - 1;
+        while (start <= end) {
+          let middleIndex = Math.floor((start + end) / 2);
+          if (searchElementLength < array[middleIndex].length) {
+            end = middleIndex - 1;
+          } else if (searchElementLength > array[middleIndex].length) {
+            start = middleIndex + 1;
+          } else {
+            return middleIndex;
+          }
+        }
+
+        return -1;
+      }
+
+      const searchingLengthName = 5;
+      let isIncludes = binarySearchIndex(userNames, searchingLengthName);
+      isIncludes > -1
+        ? alert(
+            `Елемент довжиною ${searchingLengthName} (${userNames[isIncludes]}) знаходиться під індексом ${isIncludes}`
+          )
+        : alert(`Елемента довжиною ${searchingLengthName} немає в масиві`);
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 6. Дано масив імен. Застосовуючи відповідне сортування та
+            бінарний пошук визначити, чи є у масиві ім’я довжиною 5 символів і
+            під яким індексом.
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

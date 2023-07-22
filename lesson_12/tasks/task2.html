@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css">
+    <title>Task 2</title>
+    <script>
+      // Задача 2. Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування змішуванням.
+
+      function generateArrayRandomValue(length, minValue, maxValue) {
+        let arr = [];
+        for (let i = 0; i < length; i++) {
+          const element =
+            minValue + Math.floor(Math.random() * (maxValue - minValue + 1));
+          arr.push(element);
+        }
+
+        return arr;
+      }
+
+      function cocktailSortCountChanges(arr) {
+        let countChanges = 0;
+        let leftIndx = 0;
+        let rightIndx = arr.length - 1;
+        while(leftIndx < rightIndx) {
+          for (let i = leftIndx; i < rightIndx; i++) {
+            if (arr[i] > arr[i+1]) {
+              let temp = arr[i+1];
+              arr[i+1] = arr[i];
+              arr[i] = temp;
+              countChanges++;
+              showArray(arr);
+            }
+          }
+          rightIndx--;
+
+          for (let i = rightIndx; i > leftIndx; i--) {
+           if (arr[i] < arr[i - 1]) {
+            let temp = arr[i - 1];
+            arr[i - 1] = arr[i]
+            arr[i] = temp;
+            countChanges++;
+            showArray(arr);
+           }
+          }
+          leftIndx++;
+        }
+
+        console.log(arr);
+
+        return countChanges;
+      }
+
+      
+      function showArray(arr) {
+        document.write(arr + "<br>");
+      }
+
+      let userLength = parseInt(prompt("Введіть розмір масиву", "30"));
+      if (isFinite(userLength)) {
+        if (userLength > 0) {
+          const minValue = 1;
+          const maxValue = 20;
+          let array = generateArrayRandomValue(userLength, minValue, maxValue);
+          document.write(array + "<br>");
+
+          let countChanges = cocktailSortCountChanges(array);
+          document.write(`Кількість обмінів = ${countChanges}`);
+        } else {
+          throw new Error("Помилка! Розмір масиву має бути більше 0");
+        }
+      } else {
+        throw new Error("Помилка! Введіть числове значення!");
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 2. Дано масив 30 випадкових цілих чисел. Підрахувати скільки
+            було обмінів під час сортування змішуванням. 
+          </h2>
+          </div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
