@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 1</title>
+    <script>
+      //             Задача 1. Описати масив об’єктів – сайтів розроблених компанією з
+      // такими властивостями ----- Властивості ------ назва компанії на час
+      //       розробки (назву періодично змінюють) власник компанії споснсори
+      //       (масив спонсорів) * прізвище спонсора * ім’я спонсора * сума
+      //       вкладень спонсора рік випуску вартість сайту. Знайти: 1) загальну
+      //       вартість усіх сайтів 2) кількість сайтів, що було зроблено між 2000
+      //       та 2009 рр. 3) кількість сайтів, де сума спонсорських вкладень була
+      //       більшою за 100000 4) створити загальний список усіх спонсорів (поки
+      //       можуть повторюватись, просто зібрати усі у масив) 5) знайти рік,
+      //       коли прибуток був найбільшим 6) упорядкувати список за спаданням
+      //       прибутку 7) Створити 2 окремих списки з копіями об’єктів, що містять
+      //       сайти з вартість до 10000 і більше 10000
+
+      let sitesArr = [
+        {
+          companyName: "Beep&co",
+          owner: "John Piterson",
+          sponsors: [
+            {
+              lastName: "Miller",
+              firstName: "Andrew",
+              investments: 1000,
+            },
+            {
+              lastName: "Brine",
+              firstName: "Adam",
+              investments: 1500,
+            },
+          ],
+          publicationYear: 2000,
+          cost: 3000,
+        },
+        {
+          companyName: "Mad&co",
+          owner: "Rober Piterson",
+          sponsors: [
+            {
+              lastName: "Makleron",
+              firstName: "John",
+              investments: 50000,
+            },
+            {
+              lastName: "Miller",
+              firstName: "Bill",
+              investments: 60000,
+            },
+          ],
+          publicationYear: 2005,
+          cost: 200000,
+        },
+        {
+          companyName: "Coff&co",
+          owner: "Vlad Piterson",
+          sponsors: [
+            {
+              lastName: "Makleron",
+              firstName: "John",
+              investments: 20000,
+            },
+            {
+              lastName: "Miller",
+              firstName: "Bill",
+              investments: 40000,
+            },
+          ],
+          publicationYear: 2010,
+          cost: 180000,
+        },
+      ];
+
+      // 1) загальну вартість усіх сайтів
+      let totalCost = sitesArr.reduce(
+        (prevTotalSum, siteCost) => prevTotalSum + siteCost.cost,
+        0
+      );
+      document.write(`Загальна вартість усіх сайтів: ${totalCost}<br>`);
+
+      // 2) кількість сайтів, що було зроблено між 2000 та 2009 рр.
+      let sitesCountBetween2000And2009 = sitesArr.reduce(
+        (siteCount, currentSite) => {
+          if (
+            currentSite.publicationYear >= 2000 &&
+            currentSite.publicationYear <= 2009
+          ) {
+            siteCount++;
+          }
+          return siteCount;
+        },
+        0
+      );
+      document.write(
+        `Кількість сайтів, що було зроблено між 2000 та 2009 рр.: ${sitesCountBetween2000And2009}<br>`
+      );
+
+      // 3) кількість сайтів, де сума спонсорських вкладень була більшою за 100000
+      let countSitesInvestmentsMoreThan100000 = sitesArr.reduce(
+        (sitesCount, currentSite) => {
+          let investmentsSum = currentSite.sponsors.reduce(
+            (prevSponsorInvestment, currentInvestment) =>
+              prevSponsorInvestment + currentInvestment.investments,
+            0
+          );
+          if (investmentsSum > 100000) {
+            sitesCount++;
+          }
+          console.log(`${currentSite.companyName} - ${investmentsSum}`);
+          return sitesCount;
+        },
+        0
+      );
+      document.write(
+        `Кількість сайтів, де сума спонсорських вкладень була більшою за 100000: ${countSitesInvestmentsMoreThan100000}<br>`
+      );
+
+      // 4) створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у масив)
+      let sponsorsList = sitesArr.map((site) =>
+        site.sponsors.map(
+          (sponsor) => sponsor.firstName + " " + sponsor.lastName
+        )
+      );
+
+      document.write(`Загальний список усіх спонсорів: ${sponsorsList}<br>`);
+
+      // 5) знайти рік, коли прибуток був найбільшим
+      let maxSiteCost = sitesArr.reduce(
+        (prevMaxCost, site) =>
+          prevMaxCost < site.cost ? site.cost : prevMaxCost,
+        -Infinity
+      );
+
+      let maxCostYear = sitesArr.reduce(
+        (prevSiteYear, site) =>
+          site.cost === maxSiteCost ? site.publicationYear : prevSiteYear,
+        sitesArr[0].publicationYear
+      );
+      console.log(`Max cost - ${maxSiteCost}\nYear - ${maxCostYear}`);
+
+      document.write(`Рік, коли прибуток був найбільшим: ${maxCostYear}<br>`);
+
+      // 6) упорядкувати список за спаданням прибутку
+
+      function sortSitesByCost(sites) {
+        for (let i = 0; i < sites.length; i++) {
+          sites.sort((site1, site2) => site1.cost - site2.cost);
+        }
+
+        return sites;
+      }
+
+      let sortedSites = sortSitesByCost(sitesArr);
+      console.log("6) упорядкувати список за спаданням прибутку");
+      console.log(sortedSites);
+
+      // 7) Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000
+
+      let objectsLessThan1000 = [];
+      let objectsMoreThan1000 = [];
+      for (const site in sitesArr) {
+        if (sitesArr[site].cost > 10000) {
+          objectsMoreThan1000.push(JSON.parse(JSON.stringify(sitesArr[site])));
+        } else {
+          objectsLessThan1000.push(JSON.parse(JSON.stringify(sitesArr[site])));
+        }
+      }
+
+      console.log(
+        "7) Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000"
+      );
+      console.log(objectsLessThan1000);
+      console.log(objectsMoreThan1000);
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 1. Описати масив об’єктів – сайтів розроблених компанією з
+            такими властивостями ----- Властивості ------ назва компанії на час
+            розробки (назву періодично змінюють) власник компанії споснсори
+            (масив спонсорів) * прізвище спонсора * ім’я спонсора * сума
+            вкладень спонсора рік випуску вартість сайту. Знайти: 1) загальну
+            вартість усіх сайтів 2) кількість сайтів, що було зроблено між 2000
+            та 2009 рр. 3) кількість сайтів, де сума спонсорських вкладень була
+            більшою за 100000 4) створити загальний список усіх спонсорів (поки
+            можуть повторюватись, просто зібрати усі у масив) 5) знайти рік,
+            коли прибуток був найбільшим 6) упорядкувати список за спаданням
+            прибутку 7) Створити 2 окремих списки з копіями об’єктів, що містять
+            сайти з вартість до 10000 і більше 10000
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
