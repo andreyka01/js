@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css">
+    <title>Task 2</title>
+    <script>
+      // Задача 2. Створити об’єкт «Авто». 
+
+      // Поля(властивості)
+      // Марка
+      // Розмір бака
+      // Кількість наявних літрів
+      // Кількість місць
+      // Кількість пасажирів
+
+      // Методи (дії)
+      // Заправка на вказану кількість літрів
+      // Виведення кількості пасажирів
+      // Додавання пасажирів
+      // Висадка пасажирів
+
+      function Car(initMark, initTankSize, initCurrentLiters, initPlaceNumbers, initPassengersNumbers) {
+        this.initMark = initMark;
+        this.initTankSize = initTankSize;
+        this.initCurrentLiters = initCurrentLiters;
+        this.initPlaceNumbers = initPlaceNumbers;
+        this.initPassengersNumbers = initPassengersNumbers;
+      }
+
+      Car.prototype.refuel = function(litersNumber) {
+        if (this.initCurrentLiters + litersNumber > this.initTankSize) {
+          throw new Error(`Не достатьно місця в баці`)
+        } else {
+          this.initCurrentLiters += litersNumber;
+        }
+        
+        return this.initCurrentLiters;
+      }
+
+      Car.prototype.printPassengersNumbers = function() {
+        alert(`В автомобілі "${this.initMark}" кількість пасажирів ${this.initPassengersNumbers}`);
+      }
+
+      Car.prototype.addPassengers = function(passengersNumber) {
+        let availablePlaceNumbers = this.initPlaceNumbers - this.initPassengersNumbers;
+        if (passengersNumber > availablePlaceNumbers) {
+          throw new Error(`В автомобілі "${this.initMark}" не достатьо місць`);
+        } else {
+          this.initPassengersNumbers += passengersNumber;
+        }
+
+        return this.initPassengersNumbers;
+      }
+
+      Car.prototype.disembarkingPassengers = function (passengersNumber) {
+        if (passengersNumber > this.initPassengersNumbers) {
+          throw new Error(`Такої кількості пасажирів немає в автомобілі "${this.initMark}"`);
+        } else this.initPassengersNumbers -= passengersNumber;
+
+        return this.initPassengersNumbers;
+      }
+
+      let car = new Car('Volvo', 100, 20, 6, 2);
+      console.log(car);
+      let userLitersNumber = parseFloat(prompt(`Введіть кількість палива`));
+      car.refuel(userLitersNumber);
+      let userAddPassengers = parseInt(prompt('Введіть кількість пасажирів'));
+      car.addPassengers(userAddPassengers);
+      let userRemovePassengers = parseInt(prompt('Введіть кількість пасажирів для висадки'));
+      car.disembarkingPassengers(userRemovePassengers);
+      console.log(car);
+
+      
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 2. Створити об’єкт «Авто». 
+          </h2>
+          </div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

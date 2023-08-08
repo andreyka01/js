@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 1</title>
+    <script>
+      // Задача 1. Створити об’єкт «Тир». У масиві зберігаються 1, якщо у
+      // цьому квадраті є заєць і 0 в іншому випадку.
+
+      function ShootingGallery(cellNumbers, rabbitNumbers) {
+        (this.cellNumbers = cellNumbers),
+          (this.rabbitNumbers = rabbitNumbers),
+          (this.gameField = this.generateField());
+      }
+
+      ShootingGallery.prototype.getRandomNumber = function (min, max) {
+        return min + Math.floor(Math.random() * (max - min + 1));
+      };
+
+      ShootingGallery.prototype.generateField = function () {
+        let gameField = new Array(this.cellNumbers).fill(0);
+        for (let i = 0; i < this.rabbitNumbers; ) {
+          let randomIndex = this.getRandomNumber(0, this.cellNumbers - 1);
+          if (gameField[randomIndex] !== 1) {
+            gameField[randomIndex] = 1;
+            i++;
+          }
+        }
+
+        return gameField;
+      };
+
+      ShootingGallery.prototype.gameAction = function () {
+        do {
+          let userShoot = parseInt(
+            prompt(`Введіть позицію пострілу [0;${this.cellNumbers - 1}]`)
+          );
+          if (this.gameField[userShoot] === 1) {
+            alert(`Є влучання!`);
+            this.gameField[userShoot] = 0;
+            this.rabbitNumbers--;
+          } else {
+            alert(`Промах!`);
+          }
+          console.log(this.gameField);
+        } while (this.rabbitNumbers > 0);
+        alert(`Вітаю! Ви перемогли!`);
+      };
+
+      ShootingGallery.prototype.printField = function () {
+        console.log(this.gameField);
+      };
+
+      let game = new ShootingGallery(6, 4);
+      console.log(game);
+      game.gameAction();
+      game.printField();
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 1. Створити об’єкт «Тир». У масиві зберігаються 1, якщо у
+            цьому квадраті є заєць і 0 в іншому випадку.
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

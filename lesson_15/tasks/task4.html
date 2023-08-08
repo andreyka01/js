@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 4</title>
+    <script>
+      // Задача 4. Розробити клас Baner
+      // Поля
+      // Масив об’єктів ( графічних зображень та посилань на сайти)
+
+      // методи
+      // Метод випадкового вибору об’єкта (графічного зображення та посилання)
+      // Метод виведення випадкового банера
+
+      class Baner {
+        constructor(initObjectsArr) {
+          this.objectsArr = initObjectsArr;
+        }
+        getRandomObject() {
+          const min = 0;
+          const max = this.objectsArr.length - 1;
+          let randomIndex = min + Math.floor(Math.random() * (max - min + 1));
+          console.log(randomIndex);
+          return this.objectsArr[randomIndex];
+        }
+        showRandomObject() {
+          let randomObject = this.getRandomObject();
+          document.write(`<div class="banner">
+          <a href="${randomObject.link}" class="banner__image">
+            <img src="../${randomObject.imageSource}" alt="Image">
+          </a>
+        </div>`);
+        }
+      }
+
+      let objectsArr = [
+        {
+          imageSource: "img/google.png",
+          link: "https://www.google.com/",
+        },
+        {
+          imageSource: "img/rozetka.png",
+          link: "https://rozetka.com.ua/",
+        },
+        {
+          imageSource: "img/comfy.jpeg",
+          link: "https://comfy.ua/",
+        },
+      ];
+      let baner = new Baner(objectsArr);
+      baner.showRandomObject();
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 4. Розробити клас Baner Поля Масив об’єктів ( графічних
+            зображень та посилань на сайти) методи Метод випадкового вибору
+            об’єкта (графічного зображення та посилання) Метод виведення
+            випадкового банера
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

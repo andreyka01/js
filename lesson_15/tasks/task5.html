@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 5</title>
+    <script>
+      // Задача 5. Розробити клас «Керівник танців»
+
+      // Поля
+      // Масив імен хлопців
+      // Масив імен дівчат
+
+      // Методи
+      // Метод випадкового вибору імені хлопця
+      // Метод випадкового вибору імені дівчини
+      // Метод виведення пари для танців
+      // Метод run , який ініціює через кожні 5 секунд виведення нової пари для танців
+
+      class DanceDirector {
+        constructor(initBoys, initGirls) {
+          this.boys = initBoys;
+          this.girls = initGirls;
+        }
+        getRandomBoy() {
+          const min = 0;
+          const max = this.boys.length - 1;
+          let randIndex = min + Math.floor(Math.random() * (max - min + 1));
+          return this.boys[randIndex];
+        }
+        getRandomGirl() {
+          const min = 0;
+          const max = this.girls.length - 1;
+          let randIndex = min + Math.floor(Math.random() * (max - min + 1));
+          return this.girls[randIndex];
+        }
+        getCouple() {
+          let currentBoy = this.getRandomBoy();
+          let currentGirl = this.getRandomGirl();
+
+          let findBoyIndex = this.boys.findIndex((el) => el == currentBoy);
+          this.boys.splice(findBoyIndex, 1);
+
+          let findGirlIndex = this.girls.findIndex((el) => el == currentGirl);
+          this.girls.splice(findGirlIndex, 1);
+
+          return `${currentBoy} та ${currentGirl}`;
+        }
+        run() {
+          const time = 5000;
+          return setInterval(() => {
+            if (this.boys.length > 0 && this.girls.length > 0) {
+              alert(this.getCouple());
+            }
+          }, time);
+        }
+      }
+
+      let boys = ["Ivan", "Andrew", "Max", "Michle"];
+      let girls = ["Julia", "Olga", "Natalia", "Victoria"];
+
+      let danceDirector = new DanceDirector(boys, girls);
+      danceDirector.run();
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 5. Розробити клас «Керівник танців» Поля Масив імен хлопців
+            Масив імен дівчат Методи Метод випадкового вибору імені хлопця Метод
+            випадкового вибору імені дівчини Метод виведення пари для танців
+            Метод run , який ініціює через кожні 5 секунд виведення нової пари
+            для танців
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 0</title>
+    <script>
+      // Задача 0. Дано два об’єкта. Обидва містять масив цілих чисел.
+      // При цьому у одному з них є функція знаходження суми,
+      // а у іншому – функція для знаходження добутку тих, які знаходяться між заданими мінімальним і максимальних значенням.
+      // Використати обидва методи стосовно обидвох об’єктів (використати call, apply)
+
+      let obj1 = {
+        numbers: [50, 35, 1, 80, 10, 30, 50],
+        getSum: function () {
+          return this.numbers.reduce((prevSum, element) => prevSum + element);
+        },
+      };
+
+      let obj2 = {
+        numbers: [20, 10, 40, 80, 5, 15],
+        getProduct: function (min, max) {
+          return this.numbers.reduce(
+            (prevProd, element) =>
+              element >= min && element <= max ? prevProd * element : prevProd,
+            1
+          );
+        },
+      };
+
+      let sumObj1 = obj1.getSum();
+      let sumObj2 = obj1.getSum.call(obj2);
+      // let sumObj2 = obj1.getSum.apply(obj2);
+
+      document.write(`s1 = ${sumObj1}<br>`);
+      document.write(`s2 = ${sumObj2}<br>`);
+
+      let prodObj1 = obj2.getProduct.call(obj1, 10, 30);
+      // let prodObj1 = obj2.getProduct.apply(obj1, [10, 30]);
+      let prodObj2 = obj2.getProduct(10, 30);
+      document.write(`prod1 = ${prodObj1}<br>`);
+      document.write(`prod2 = ${prodObj2}<br>`);
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 0. Дано два об’єкта. Обидва містять масив цілих чисел. При
+            цьому у одному з них є функція знаходження суми, а у іншому –
+            функція для знаходження добутку тих, які знаходяться між заданими
+            мінімальним і максимальних значенням. Використати обидва методи
+            стосовно обидвох об’єктів (використати call, apply)
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

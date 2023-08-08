@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 3</title>
+    <script>
+      // Задача 3. Розробити клас MultChecker для перевірки таблиці множення
+
+      // Поля
+      // Число, яке перевіряємо (наприклад, перевірка частини таблиці множення на 7)
+      // Кількість правильних відповідей
+      // Кількість неправильних відповідей
+
+      // Методи
+      // Генерування прикладу (метод випадковим чином визначає друге число, перше число фіксоване)
+      // Перевірка правильності вказаної відповіді
+      // render
+
+      class MultChecker {
+        constructor(initFirstNumber) {
+          this.number = initFirstNumber;
+          this.correctAnswers = 0;
+          this.incorrectAnswers = 0;
+        }
+        generateExample() {
+          let secondNumber = 1 + Math.floor(Math.random() * 10);
+          return secondNumber;
+        }
+        checkAswer() {
+          let secondNum = this.generateExample();
+          let userAnswer = parseInt(
+            prompt(`Обчисліть приклад: ${this.number} * ${secondNum}`)
+          );
+          let answer = this.number * secondNum;
+          if (userAnswer === answer) {
+            this.correctAnswers++;
+          } else {
+            this.incorrectAnswers++;
+          }
+        }
+        render() {
+          alert(
+            `Кількість правильних відповідей: ${this.correctAnswers}\nКількість неправильних відповідей: ${this.incorrectAnswers}`
+          );
+        }
+      }
+
+      let multTrainer = new MultChecker(5);
+      for (let i = 0; i < 5; i++) {
+        multTrainer.checkAswer();
+      }
+      multTrainer.render();
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 3. Розробити клас MultChecker для перевірки таблиці множення
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
