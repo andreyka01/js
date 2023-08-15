@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 1</title>
+    <script>
+      //  Задача 1. Створити клас TDate для роботи із датами у форматі
+      // “день.місяць.рік”. Дата представляється структурою із трьома полями.
+      // Реалізувати методи збільшення/зменшення дати на певну кількість
+      // днів, місяців чи років. Введення та виведення дати реалізувати за
+      // допомогою методу toString.
+
+      class TDate {
+        #day;
+        #month;
+        #year;
+        constructor(initDay, initMonth, initYear) {
+          this.Day = initDay;
+          this.Month = initMonth;
+          this.Year = initYear;
+        }
+        get Day() {
+          return this.#day;
+        }
+        set Day(newDate) {
+          if (newDate < 1 || newDate > 31) {
+            throw new Error("Помилка! Не корткне значення поля!");
+          }
+          this.#day = newDate;
+        }
+
+        get Month() {
+          return this.#month;
+        }
+        set Month(newMonth) {
+          if (newMonth < 1 || newMonth > 12) {
+            throw new Error("Помилка! Не корткне значення поля!");
+          }
+          this.#month = newMonth;
+        }
+
+        get Year() {
+          return this.#year;
+        }
+        set Year(newYear) {
+          if (newYear < 1) {
+            throw new Error("Помилка! Не корткне значення поля!");
+          }
+          this.#year = newYear;
+        }
+        increaseYear(yearValue) {
+          this.Year += yearValue;
+        }
+        reduceYear(yearValue) {
+          this.Year -= yearValue;
+        }
+        increaseMonth(monthValue) {
+          let currentMonth = this.Month + monthValue;
+          this.Year += Math.floor(currentMonth / 12);
+          this.Month = currentMonth % 12;
+          if (this.Month > 12) {
+            this.Month %= 12;
+            this.Year += Math.floor(this.Month / 12);
+          }
+        }
+        reduceMonth(monthValue) {
+          let countMonths = this.Year * 12 + this.Month - 1;
+          let countMonthsAfterReducing = countMonths - monthValue;
+          this.Year = Math.floor(countMonthsAfterReducing / 12);
+          this.Month = (countMonthsAfterReducing % 12) + 1;
+        }
+        increaseDay(dayValue) {
+          let currentDay = this.Day + dayValue;
+          this.Day = currentDay % 31;
+          this.Month += Math.floor(currentDay / 31);
+          if (this.Month > 12) {
+            this.Month %= 12;
+            this.Year += Math.floor(this.Month / 12);
+          }
+        }
+        reduceDay(dayValue) {
+          let currentDay = this.Day - dayValue;
+          while (currentDay < 1) {
+            this.Month--;
+          }
+          this.Day = currentDay;
+        }
+        toString() {
+          return `${this.Day}.${this.Month}.${this.Year}<br>`;
+        }
+      }
+
+      let userDay = parseInt(prompt("Початоквий день"));
+      let userMonth = parseInt(prompt("Початоквий місяць"));
+      let userYear = parseInt(prompt("Початоквий рік"));
+
+      let date = new TDate(userDay, userMonth, userYear);
+      document.write(date);
+
+      let askingForIncrease = confirm("Бажаєте збільшити дату?");
+      let askingForReduce;
+      if (!askingForIncrease) {
+        askingForReduce = confirm("Бажаєте зменшити дату?");
+      }
+
+      if (askingForIncrease) {
+        let userIncreaseDay = parseInt(prompt("Кількість днів для додавання"));
+        let userIncreaseMonth = parseInt(
+          prompt("Кількість місяців для додавання")
+        );
+        let userIncreaseYear = parseInt(
+          prompt("Кількість років для додавання")
+        );
+
+        date.increaseDay(userIncreaseDay);
+        date.increaseMonth(userIncreaseMonth);
+        date.increaseYear(userIncreaseYear);
+
+        document.write(date);
+      }
+
+      if (askingForReduce) {
+        let userReduceDay = parseInt(prompt("Кількість днів для віднімання"));
+        let userReduceMonth = parseInt(
+          prompt("Кількість місяців для віднімання")
+        );
+        let userReduceYear = parseInt(prompt("Кількість років для віднімання"));
+
+        date.reduceDay(userReduceDay);
+        date.reduceMonth(userReduceMonth);
+        date.reduceYear(userReduceYear);
+
+        document.write(date);
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 1. Створити клас TDate для роботи із датами у форматі
+            “день.місяць.рік”. Дата представляється структурою із трьома полями.
+            Реалізувати методи збільшення/зменшення дати на певну кількість
+            днів, місяців чи років. Введення та виведення дати реалізувати за
+            допомогою методу toString.
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

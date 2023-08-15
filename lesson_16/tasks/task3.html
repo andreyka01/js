@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 3</title>
+    <script>
+      // Задача 3. Об’єкт “Фірма” (використати члени-класи)
+      // поля
+      // назва фірми;
+      // дата заснування (рік, місяць);
+      // послуги (назва послуги, вартість, термін виконання);
+      // адреси філіалів (країна, місто, вулиця, номер будинку);
+      // ==================================================================
+      // методи
+      // визначення кількості років існування фірми;
+      // виведення всіх філіалів фірми у вказаному місті;
+      // виведення на екран послуг, що можуть бути виконані за вказану суму грошей та вказаний термін часу;
+
+      class Firm {
+        constructor(name, foundationDate, services, departments) {
+          this.name = name;
+          this.foundationDate = foundationDate;
+          this.services = services;
+          this.departments = departments;
+        }
+
+        getFirmAge(currentYear) {
+          return currentYear - this.foundationDate.year;
+        }
+        getAllDepartmenntsInCity(cityName) {
+          let departmentsList = this.departments.filter(
+            (department) => department.city === cityName
+          );
+          return departmentsList;
+        }
+        getServices(price, term) {
+          let servicesList = this.services.filter(
+            (service) =>
+              service.servicePrice <= price && service.serviceTerm <= term
+          );
+          return servicesList;
+        }
+      }
+
+      class Services {
+        constructor(serviceName, servicePrice, serviceTerm) {
+          this.serviceName = serviceName;
+          this.servicePrice = servicePrice;
+          this.serviceTerm = serviceTerm;
+        }
+      }
+
+      class Departments {
+        constructor(country, city, street, buildingNumber) {
+          this.country = country;
+          this.city = city;
+          this.street = street;
+          this.buildingNumber = buildingNumber;
+        }
+      }
+
+      let services = [
+        new Services("Web design", 900, 10),
+        new Services("Web development", 1300, 25),
+        new Services("Promotion", 1000, 8),
+        new Services("Сonsultation", 150, 1),
+      ];
+
+      let departments = [
+        new Departments("Ukraine", "Kyiv", "Khreschatyk", "2"),
+        new Departments("Ukraine", "Lviv", "Nalyvaika", "13/2"),
+        new Departments("Ukraine", "Kharkiv", "Sumska", "32"),
+        new Departments("Ukraine", "Odessa", "Genoese", "3"),
+      ];
+
+      let firm = new Firm(
+        "Dot&co",
+        { year: 2018, month: "June" },
+        services,
+        departments
+      );
+
+      document.write(
+        `Кількості років існування фірми: ${firm.getFirmAge(2023)}<br>`
+      );
+
+      let departmentInCity = firm.getAllDepartmenntsInCity("Kyiv");
+      console.log(departmentInCity);
+      for (let department of departmentInCity) {
+        document.write(
+          `Філія розташована в ${department.city} розташована за адресою ${department.street} ${department.buildingNumber}<br>`
+        );
+      }
+
+      let servicePrice = 1000;
+      let serviceTerm = 10;
+      let servicesForPrice = firm.getServices(servicePrice, serviceTerm);
+      console.log(servicesForPrice);
+      for (const service of servicesForPrice) {
+        document.write(
+          `За суму ${servicePrice}$ та за термін ${serviceTerm} днів доступна послуга ${service.serviceName} (${service.serviceTerm} днів)<br>`
+        );
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 3. Об’єкт “Фірма” (використати члени-класи) поля назва фірми;
+            дата заснування (рік, місяць); послуги (назва послуги, вартість,
+            термін виконання); адреси філіалів (країна, місто, вулиця, номер
+            будинку); методи визначення кількості років існування фірми;
+            виведення всіх філіалів фірми у вказаному місті; виведення на екран
+            послуг, що можуть бути виконані за вказану суму грошей та вказаний
+            термін часу;
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
