@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 1</title>
+    <script>
+      //  Задача 1. Створити клас, що дозволяє виконувати такі операції над масивами:
+      // знаходження кількості додатних, кількості від’ємних, кількість входжень деякого числа (статичні методи)
+
+      class arrOperating {
+        static countPositiveNumbers(arr) {
+          return arr.reduce(
+            (counter, number) => (number > 0 ? counter + 1 : counter),
+            0
+          );
+        }
+        static countNegativeNumbers(arr) {
+          return arr.reduce(
+            (counter, number) => (number < 0 ? counter + 1 : counter),
+            0
+          );
+        }
+        static countNumberIncludes(arr, value) {
+          return arr.reduce(
+            (counter, number) => (number === value ? counter + 1 : counter),
+            0
+          );
+        }
+      }
+
+      let arr = [-10, 0, -3, 2, 3, 10, -4, 5, 2];
+      document.write(`Масив: [${arr}]<br>`);
+      document.write(
+        `Кількість додатних: ${arrOperating.countPositiveNumbers(arr)}<br>`
+      );
+      document.write(
+        `Кількість від’ємних: ${arrOperating.countNegativeNumbers(arr)}<br>`
+      );
+      document.write(
+        `Кількість входжень деякого числа (число 2): ${arrOperating.countNumberIncludes(
+          arr,
+          2
+        )}<br>`
+      );
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 1. Створити клас, що дозволяє виконувати такі операції над
+            масивами: знаходження кількості додатних, кількості від’ємних,
+            кількість входжень деякого числа (статичні методи)
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 3</title>
+    <script>
+      // Створити клас Нагадувач.
+      // Кожні вказані кількості секунд (використати setInterval) програма нагадує про якусь подію (це просто текст)
+      // і також виводиться порядковий номер скільки раз вже нагадування було.
+      // Зробити так, щоб неможна було зробити одночасно декілька об’єктів-нагадувачів.
+      // Методи зупинки таймера, метод зміни повідомлення без зупинки таймера.
+
+      class Remider {
+        static messageSingle;
+        constructor(message, interval) {
+          if (Remider.messageSingle) return Remider.messageSingle;
+          this.message = message;
+          Remider.messageSingle = this;
+          this.interval = interval;
+        }
+        static stop() {
+          clearInterval(this.interval);
+        }
+        run() {
+          let countRemiders = 1;
+          setInterval(() => {
+            document.write(`№${countRemiders++} ${this.message}<br>`);
+          }, this.interval);
+        }
+        changeText(newMessage, time) {
+          setTimeout(() => {
+            Remider.messageSingle.message = newMessage;
+          }, time);
+        }
+      }
+
+      let newMessage = "New message";
+      let reminder1 = new Remider("Here is a message", 2500);
+      reminder1.run();
+      reminder1.changeText(newMessage, 5000);
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 3. Створити клас Нагадувач. Кожні вказані кількості секунд
+            (використати setInterval) програма нагадує про якусь подію (це
+            просто текст) і також виводиться порядковий номер скільки раз вже
+            нагадування було. Зробити так, щоб неможна було зробити одночасно
+            декілька об’єктів-нагадувачів. Методи зупинки таймера, метод зміни
+            повідомлення без зупинки таймера.
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

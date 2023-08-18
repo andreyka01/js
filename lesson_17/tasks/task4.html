@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 4</title>
+    <script>
+      // Задача 4. Особиста бібліотека.
+      // Картотека домашньої бібліотеки: дані книги (автори (піб, рік народження, короткий опис),
+      // назва книги, жанр, видавництво (назва, реєстраційний номер, рік засування)).
+      // Реалізувати розділи бібліотеки організувати додавання/вилучення книг та  вибір книг за назвою, за ПІБ автора, за видавництвом.
+
+      class Author {
+        #birthYear;
+        constructor(initData) {
+          this.fullName = initData.fullName;
+          this.BirthYear = initData.birthYear;
+          this.description = initData.description;
+        }
+        get BirthYear() {
+          return this.#birthYear;
+        }
+        set BirthYear(value) {
+          if (value >= new Date().getFullYear())
+            throw new Error("Помилка! Рік народження вказаний невірно!");
+          this.#birthYear = value;
+        }
+        toString() {
+          return `${this.fullname} - ${this.BirthYear} - ${this.description}`;
+        }
+      }
+
+      class Publishing {
+        #foundationYear;
+        constructor(initData) {
+          this.name = initData.name;
+          this.registrationNumber = initData.registrationNumber;
+          this.FoundationYear = initData.foundationYear;
+        }
+        get FoundationYear() {
+          return this.#foundationYear;
+        }
+        set FoundationYear(value) {
+          if (value > new Date().getFullYear())
+            throw new Error(
+              "Помилка! Рік заснування не може бути більше даного року!"
+            );
+          this.#foundationYear = value;
+        }
+      }
+
+      class Book {
+        constructor(initData) {
+          this.title = initData.title;
+          this.genre = initData.genre;
+          this.publishing = new Publishing(initData);
+          this.author = new Author(initData);
+        }
+      }
+
+      class Library {
+        constructor(initName, initBookList) {
+          this.initName = initName;
+          this.bookList = initBookList;
+        }
+        addBook(book) {
+          this.bookList.push(book);
+        }
+        removeBook(bookTitle) {
+          this.bookList = this.bookList.filter(
+            (book) => book.title !== bookTitle
+          );
+        }
+        filterByTitle(bookTitle) {
+          return this.bookList.filter((book) => book.title === bookTitle);
+        }
+        filterByAuthor(authorName) {
+          return this.bookList.filter(
+            (book) => book.author.fullName === authorName
+          );
+        }
+        filterByPublishing(publishingName) {
+          return this.bookList.filter(
+            (book) => book.publishing.name === publishingName
+          );
+        }
+      }
+
+      let bookList = [
+        new Book({
+          title: "Aeneid",
+          genre: "Poem",
+          name: "UAbook",
+          registrationNumber: "UA221033KV",
+          foundationYear: 2020,
+          fullName: "Ivan Kotlyarevskyi",
+          birthYear: 2000,
+          description:
+            "Ukrainian poet, translator and educator, playwright, author of the poem Aeneid",
+        }),
+        new Book({
+          title: "Pet sematary",
+          genre: "Horror",
+          name: "Dak",
+          registrationNumber: "US221033KV",
+          foundationYear: 1983,
+          fullName: "Stephen King",
+          birthYear: 1947,
+          description:
+            "American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels",
+        }),
+        new Book({
+          title: "IT",
+          genre: "Horror",
+          name: "Dak",
+          registrationNumber: "US221033KV",
+          foundationYear: 1983,
+          fullName: "Stephen King",
+          birthYear: 1947,
+          description:
+            "American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels",
+        }),
+      ];
+
+      let library = new Library("Amazon", bookList);
+      console.log(library);
+      library.addBook(
+        new Book({
+          title: "THE OUTSIDER",
+          genre: "Horror",
+          name: "Dak",
+          registrationNumber: "US221033KV",
+          foundationYear: 1983,
+          fullName: "Stephen King",
+          birthYear: 1947,
+          description:
+            "American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels",
+        })
+      );
+      console.log(library);
+      console.log(library.filterByTitle("IT"));
+      console.log(library.filterByAuthor("Stephen King"));
+      console.log(library.filterByPublishing("UAbook"));
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 4. Особиста бібліотека. Картотека домашньої бібліотеки: дані
+            книги (автори (піб, рік народження, короткий опис), назва книги,
+            жанр, видавництво (назва, реєстраційний номер, рік засування)).
+            Реалізувати розділи бібліотеки організувати додавання/вилучення книг
+            та вибір книг за назвою, за ПІБ автора, за видавництвом.
+          </h2>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
