@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 5</title>
+    <style>
+      .rows,
+      .columns {
+        margin-bottom: 5px;
+      }
+      button {
+        padding: 5px 10px;
+        background-color: #dadada;
+        margin-bottom: 5px;
+      }
+    </style>
+    <script>
+      // Задача 5.
+      // Користувач задає кількість рядків і стовпців. Відобразити таблицю, у клітинках якої знаходяться числа 1, 2, 3
+      function createTable() {
+        let rowNumbers = parseInt(document.querySelector("#rows-number").value);
+        let columnNumbers = parseInt(
+          document.querySelector("#columns-number").value
+        );
+        if (rowNumbers <= 0 || columnNumbers <= 0) {
+          throw new Error("Помилка! Значення повинні бути більше 0");
+        } else {
+          let tableEl = document.createElement("table");
+          let number = 1;
+          for (let rowNum = 1; rowNum <= rowNumbers; rowNum++) {
+            let tableRow = document.createElement("tr");
+            for (let colNum = 1; colNum <= columnNumbers; colNum++) {
+              let tableCol = document.createElement("td");
+              tableCol.innerText = number++;
+              tableRow.append(tableCol);
+            }
+            tableEl.append(tableRow);
+            document.querySelector(".action").append(tableEl);
+          }
+        }
+      }
+      window.onload = function () {
+        document.querySelector("#btn-create").onclick = createTable;
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 5. Користувач задає кількість рядків і стовпців. Відобразити
+            таблицю, у клітинках якої знаходяться числа 1, 2, 3
+          </h2>
+          <div class="task__result">
+            <div class="rows">
+              <label>
+                Кількість рядків
+                <input type="number" id="rows-number" />
+              </label>
+            </div>
+            <div class="columns">
+              <label>
+                Кількість стовпців
+                <input type="number" id="columns-number" />
+              </label>
+            </div>
+            <div class="action">
+              <button type="button" id="btn-create">Створити</button>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

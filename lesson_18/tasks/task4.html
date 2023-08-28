@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 4</title>
+    <script>
+      // Задача 4. Наперед задано у скрипті масив зі списком бажань.
+      // Після завантаження сторінки випадковим чином вибираються 3 і відображаються у окремих div
+      // (їх треба створити і додати на сторінку)
+      window.onload = function () {
+        let wishArr = [
+          "Сьогодні пощастить",
+          "Будьте впевнені",
+          "Не відмовляйтесь від пропозицій",
+          "Все буде добре",
+          "Гарного дня",
+          "Частіше посміхайтесь!",
+        ];
+        function getRandomWish(arr) {
+          const min = 0;
+          const max = arr.length - 1;
+          let randomIndex = min + Math.floor(Math.random() * (max - min + 1));
+          return arr[randomIndex];
+        }
+        for (let i = 0; i < 3; i++) {
+          let randomWish = getRandomWish(wishArr);
+          let divEl = document.createElement("div");
+          divEl.innerText = randomWish;
+          document.querySelector(".task__result").append(divEl);
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 4. Наперед задано у скрипті масив зі списком бажань. Після
+            завантаження сторінки випадковим чином вибираються 3 і
+            відображаються у окремих div (їх треба створити і додати на
+            сторінку)
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

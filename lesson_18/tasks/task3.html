@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 3</title>
+    <style>
+      .birthday > label {
+        margin-bottom: 5px;
+      }
+      button {
+        padding: 5px 10px;
+        background-color: #dadada;
+      }
+    </style>
+    <script>
+      // Задача 3. Користувач задає рік народження. Визначити кількість років користувача.
+      function userAge() {
+        let currentYear = new Date().getFullYear();
+        let userDateValue = parseInt(
+          document.getElementById("user-year").value
+        );
+        if (userDateValue < 0 || userDateValue > currentYear) {
+          document.querySelector(".result").innerHTML = "";
+          throw new Error("Помилка! Некоректне значення!");
+        } else {
+          let userAge = currentYear - userDateValue;
+          document.querySelector(
+            ".result"
+          ).innerText = `Кількість років: ${userAge}`;
+        }
+      }
+      window.onload = function () {
+        document.getElementById("operate").onclick = userAge;
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 3. Користувач задає рік народження. Визначити кількість років
+            користувача.
+          </h2>
+          <div class="task__result">
+            <div class="birthday">
+              <label>
+                Рік народження
+                <input type="number" id="user-year" />
+              </label>
+              <div class="operate">
+                <button type="button" id="operate">Обчислити</button>
+              </div>
+              <div class="result"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

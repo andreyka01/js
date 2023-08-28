@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 1</title>
+    <style>
+      .first,
+      .second {
+        margin-bottom: 5px;
+      }
+      .actions {
+        margin-bottom: 5px;
+      }
+      button {
+        padding: 5px 10px;
+        background-color: #dadada;
+      }
+    </style>
+    <script>
+      //  Задача 1. Розробити калькулятор
+      function getSum() {
+        const firstNum = parseFloat(document.getElementById("firstNum").value);
+        const secondNum = parseFloat(
+          document.getElementById("secondNum").value
+        );
+        const result = firstNum + secondNum;
+        document.getElementById("result").value = result.toFixed(2);
+      }
+      function getSub() {
+        const firstNum = parseFloat(document.getElementById("firstNum").value);
+        const secondNum = parseFloat(
+          document.getElementById("secondNum").value
+        );
+        const result = firstNum - secondNum;
+        document.getElementById("result").value = result.toFixed(2);
+      }
+      function getMult() {
+        const firstNum = parseFloat(document.getElementById("firstNum").value);
+        const secondNum = parseFloat(
+          document.getElementById("secondNum").value
+        );
+        const result = firstNum * secondNum;
+        document.getElementById("result").value = result.toFixed(2);
+      }
+      function getDiv() {
+        const firstNum = parseFloat(document.getElementById("firstNum").value);
+        const secondNum = parseFloat(
+          document.getElementById("secondNum").value
+        );
+        if (secondNum === 0) {
+          document.getElementById("result").value = "";
+          throw new Error("На 0 ділити неможна!");
+        }
+        const result = firstNum / secondNum;
+        document.getElementById("result").value = result.toFixed(2);
+      }
+
+      window.onload = function () {
+        document.getElementById("sum").onclick = getSum;
+        document.getElementById("sub").onclick = getSub;
+        document.getElementById("mult").onclick = getMult;
+        document.getElementById("div").onclick = getDiv;
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">Задача 1. Розробити калькулятор</h2>
+          <div class="task__result">
+            <div class="first">
+              <label
+                >First Number
+                <input type="number" id="firstNum" />
+              </label>
+            </div>
+            <div class="second">
+              <label
+                >Second Number
+                <input type="number" id="secondNum" />
+              </label>
+            </div>
+            <div class="actions">
+              <button id="sum">Додати</button>
+              <button id="sub">Відняти</button>
+              <button id="mult">Помножити</button>
+              <button id="div">Поділити</button>
+            </div>
+            <hr />
+            <div class="result">
+              <label>
+                Результат
+                <input type="number" id="result" />
+              </label>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

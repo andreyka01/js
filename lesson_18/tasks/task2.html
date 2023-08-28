@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css">
+    <title>Task 2</title>
+    <style>
+      .grnSum,
+      .eurSum,
+      .action {
+        margin-bottom: 5px;
+      }
+      .actions {
+        margin-bottom: 5px;
+      }
+      button {
+        padding: 5px 10px;
+        background-color: #dadada;
+      }
+    </style>
+    <script>
+      // Задача 2. Зробити конвертер валют (курси валют – константи у скрипті)
+      function converter() {
+        const usdRate = 36.94;
+        const eurRate = 39.91;
+        const grnSum = parseFloat(document.querySelector('#grnSum').value);
+        if (grnSum < 0) {
+          document.querySelector('#eurSum').value = '';
+          document.querySelector('#usdSum').value = '';
+          throw new Error('Помилка! Сума вказана в гривнях має бути більше 0!');
+        }
+        else {
+          let eurSum = grnSum / eurRate;
+          let usdSum = grnSum / usdRate;
+          document.querySelector('#eurSum').value = eurSum.toFixed(2);
+          document.querySelector('#usdSum').value = usdSum.toFixed(2);
+        }
+      }
+      window.onload = function () {
+        document.querySelector('#convert').onclick = converter;
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 2. Зробити конвертер валют (курси валют – константи у скрипті)
+          </h2>
+          <div class="task__result">
+            <div class="grnSum">
+              <label
+                >Сума в гривнях
+                <input type="number" id="grnSum" />
+              </label>
+            </div>
+            <div class="action">
+              <button type="button" id="convert">Конвертувати</button>
+            </div>
+            <div class="eurSum">
+              <label
+                >Сума в гривнях
+                <input type="number" id="eurSum"/>
+              </label>
+            </div>
+            <div class="usdSum">
+              <label
+                >Сума в долларах
+                <input type="number" id="usdSum"/>
+              </label>
+            </div>
+          </div>
+          </div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

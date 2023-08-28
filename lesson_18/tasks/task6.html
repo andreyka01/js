@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 6</title>
+    <style>
+      .grade-numbers,
+      .columns {
+        margin-bottom: 5px;
+      }
+      button {
+        padding: 5px 10px;
+        background-color: #dadada;
+        margin-bottom: 5px;
+      }
+    </style>
+    <script>
+      // Задача 6.
+      // Користувач задає кількість оцінок і натискає на кнопку «get table».
+      // В результаті формується таблиця з input, куди користувач вводить оцінки.
+      // Після цього натискає на кнопку “get sum” і знаходить середнє значення.
+
+      function createTable() {
+        let rowNumbers = parseInt(document.querySelector("#grades").value);
+        let columnNumbers = 1;
+        if (rowNumbers <= 0) {
+          throw new Error("Помилка! Значення повинно бути більше 0");
+        } else {
+          let tableEl = document.createElement("table");
+          for (let rowNum = 1; rowNum <= rowNumbers; rowNum++) {
+            let tableRow = document.createElement("tr");
+            for (let colNum = 1; colNum <= columnNumbers; colNum++) {
+              let tableCol = document.createElement("td");
+              let inpEl = document.createElement("input");
+              inpEl.setAttribute("type", "number");
+              inpEl.classList.add("gradeValue");
+              tableCol.append(inpEl);
+              tableRow.append(tableCol);
+            }
+            tableEl.append(tableRow);
+            document.querySelector(".action").append(tableEl);
+          }
+          let btnEl = document.createElement("button");
+          btnEl.classList.add("sum");
+          btnEl.innerText = "get sum";
+          tableEl.after(btnEl);
+
+          btnEl.onclick = getSum;
+        }
+      }
+
+      function getSum() {
+        let inpList = document.querySelectorAll(".gradeValue");
+        let sum = 0;
+        for (const inp of inpList) {
+          if (parseInt(inp.value) >= 1 && parseInt(inp.value) <= 12) {
+            sum += parseInt(inp.value);
+          } else {
+            throw new Error(
+              "Помилка! Значення оцінок повинно бути в межах [1;12]"
+            );
+          }
+        }
+        let avgValue = sum / inpList.length;
+        let divEl = document.createElement("div");
+        divEl.innerText = `Середнє значення: ${avgValue.toFixed(2)}`;
+        document.querySelector(".sum").after(divEl);
+      }
+      window.onload = function () {
+        document.querySelector("#btn-create").onclick = createTable;
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 6. Користувач задає кількість оцінок і натискає на кнопку
+            «get table». В результаті формується таблиця з input, куди
+            користувач вводить оцінки. Після цього натискає на кнопку “get sum”
+            і знаходить середнє значення.
+          </h2>
+          <div class="task__result">
+            <div class="grade-numbers">
+              <label>
+                Кількість оцінок
+                <input type="number" id="grades" />
+              </label>
+            </div>
+            <div class="action">
+              <button type="button" id="btn-create">get table</button>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

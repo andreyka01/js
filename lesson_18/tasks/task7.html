@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 7</title>
+    <style>
+      .grade-numbers,
+      .columns {
+        margin-bottom: 5px;
+      }
+      button {
+        padding: 5px 10px;
+        background-color: #dadada;
+        margin-bottom: 5px;
+      }
+    </style>
+    <script>
+      // Задача 7. Подорож складається з 3 етапів.
+      // На кожному етапі користувач може вибрати один з видів транспорту (авто, автобус, літак - випадаючий список),
+      // харчування (сніданок, обід, вечеря – checkbоx)
+      // та одного з 3-х гідів(використати  - radio buttons). Ціни визначте самі.
+      // Підрахувати загальну вартість.
+
+      function getSum() {
+        let sum = 0;
+        let vehiclePrice = parseInt(document.getElementById("vehicle").value);
+        sum = vehiclePrice;
+        let inpList = document.querySelectorAll('input');
+        for (const inp of inpList) {
+          if (inp.checked) {
+            sum+=parseInt(inp.value);
+          }
+        }
+        if (document.querySelector('.res-sum')) {
+          document.querySelector('.res-sum').remove(); 
+          let elDiv = document.createElement('div');
+          elDiv.classList.add('res-sum');
+          elDiv.innerText = `Загальна вартість ${sum}`;
+          document.querySelector('#btn-sum').after(elDiv);     
+        } else {
+          let elDiv = document.createElement('div');
+          elDiv.classList.add('res-sum');
+          elDiv.innerText = `Загальна вартість ${sum}`;
+          document.querySelector('#btn-sum').after(elDiv);
+        }
+      }
+      window.onload = function () {
+        document.querySelector("#btn-sum").onclick = getSum;
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 7. Подорож складається з 3 етапів. На кожному етапі
+            користувач може вибрати один з видів транспорту (авто, автобус,
+            літак - випадаючий список), харчування (сніданок, обід, вечеря –
+            checkbоx) та одного з 3-х гідів(використати - radio buttons). Ціни
+            визначте самі. Підрахувати загальну вартість.
+          </h2>
+          <div class="task__result">
+            <div class="travel">
+              <div class="travel__vehicle">
+                <label>
+                  Транспортний засіб
+                  <select id="vehicle">
+                    <option value="5000">авто</option>
+                    <option value="4500">автобус</option>
+                    <option value="4800">літак</option>
+                  </select>
+                </label>
+              </div>
+              <div class="travel__feeding">
+                  Харчування:
+                  <div>
+                    <label
+                      >Сніданок<input type="checkbox" value="800"
+                    /></label>
+
+                    <label>Обід<input type="checkbox" value="1000"/></label>
+                    <label
+                      >Вечеря<input type="checkbox" value="1000"
+                    /></label>
+              </div>
+              <div class="travel__guide">
+                Гід:
+                <div>
+                  <label>
+                    Денисенко Віталій
+                    <input type="radio" name="guide" value="1500">
+                  </label>
+                  <label>
+                    Петренко Максим
+                    <input type="radio" name="guide" value="1700">
+                  </label>
+                  <label>
+                    Ткаченко Марія
+                    <input type="radio" name="guide" value="2000">
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="action">
+              <button type="button" id="btn-sum">Загальна вартість</button>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
