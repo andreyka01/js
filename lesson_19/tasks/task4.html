@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 4</title>
+    <style>
+      table {
+        margin-bottom: 10px;
+      }
+    </style>
+    <script>
+      // Задача 4.
+      // Дано 3 таблиці розмірності 3*3 з випадковими числами.
+      // Якщо відбувається клік на якійсь із клітинок, то до відповідної таблиці додається червона рамка
+      // (спробуйте додати можливість відображення кількості кліків біля назви таблиці з використанням відповідно доданого для цього атрибута).
+      class Table {
+        constructor(tableCount = 3, colsNum = 3, rowsNum = 3) {
+          this.tableCount = tableCount;
+          this.colsNum = colsNum;
+          this.rowsNum = rowsNum;
+        }
+        getRandomNumber(minNumber = 1, maxNumber = 10) {
+          return (
+            minNumber + Math.floor(Math.random() * (maxNumber - minNumber + 1))
+          );
+        }
+        changeBorder() {
+          let element = this;
+          let tableElement = element.closest("table");
+          tableElement.style.outline = "1px solid red";
+
+          let clickCount = parseInt(tableElement.getAttribute("clickCount"));
+          clickCount++;
+          tableElement.setAttribute("clickCount", clickCount);
+          let caption = tableElement.firstChild;
+          caption.lastChild.innerText = clickCount;
+        }
+        render(containerSelector) {
+          for (
+            let tableCount = 1;
+            tableCount <= this.tableCount;
+            tableCount++
+          ) {
+            let table = document.createElement("table");
+            table.setAttribute("clickCount", "0");
+            let caption = document.createElement("caption");
+            caption.innerHTML = `№${tableCount} <span></span>`;
+            caption.lastChild.innerText = table.getAttribute("clickCount");
+            table.append(caption);
+            for (let rowsNum = 1; rowsNum <= this.rowsNum; rowsNum++) {
+              let tr = document.createElement("tr");
+              for (let colsNum = 1; colsNum <= this.colsNum; colsNum++) {
+                let td = document.createElement("td");
+                td.innerText = `${this.getRandomNumber()}`;
+                td.onclick = this.changeBorder;
+                tr.append(td);
+              }
+              table.append(tr);
+            }
+            if (containerSelector) {
+              document.querySelector(containerSelector).append(table);
+            }
+          }
+        }
+      }
+      window.onload = function () {
+        let table = new Table();
+        table.render(".task__result");
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 4. Дано 3 таблиці розмірності 3*3 з випадковими числами. Якщо
+            відбувається клік на якійсь із клітинок, то до відповідної таблиці
+            додається червона рамка (спробуйте додати можливість відображення
+            кількості кліків біля назви таблиці з використанням відповідно
+            доданого для цього атрибута).
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

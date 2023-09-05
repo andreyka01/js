@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 1</title>
+    <style>
+      .first,
+      .second {
+        margin-bottom: 5px;
+      }
+      .actions {
+        margin-bottom: 5px;
+      }
+      button {
+        padding: 5px 10px;
+        background-color: #dadada;
+      }
+    </style>
+    <script>
+      //  Задача 1. Дано 10 рядків тексту «Hello!» у окремих div. При кліку на
+      // якийсь із них усі наступні повинні бути зафарбовані у червоний колір.
+      class Div {
+        constructor(count = 10, message = "Hello!") {
+          this.count = count;
+          this.message = message;
+        }
+        color() {
+          let element = this;
+          while (element.nextElementSibling) {
+            element = element.nextElementSibling;
+            element.style.color = "red";
+          }
+        }
+        render(containerSelector) {
+          for (let i = 0; i < this.count; i++) {
+            let divEl = document.createElement("div");
+            divEl.innerText = this.message;
+            divEl.onclick = this.color.bind(this);
+            if (containerSelector) {
+              let wrapper = document.querySelector(containerSelector);
+              wrapper.append(divEl);
+            }
+          }
+        }
+      }
+
+      window.onload = function () {
+        let divElement = new Div();
+        divElement.render(".task__result");
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 1. Дано 10 рядків тексту «Hello!» у окремих div. При кліку на
+            якийсь із них усі наступні повинні бути зафарбовані у червоний
+            колір.
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

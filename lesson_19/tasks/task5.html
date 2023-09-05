@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 5</title>
+    <style>
+      .carts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      .active.cart {
+        border: 3px solid green;
+      }
+      .cart > *:not(:last-child) {
+        margin-bottom: 10px;
+      }
+      .cart__image {
+        position: relative;
+        padding-bottom: 55%;
+      }
+      .cart__image img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .cart__title {
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .cart__title:hover {
+        text-decoration: underline;
+      }
+    </style>
+    <script>
+      // Задача 5.
+      // Відображаємо картки товарів, які користувач може вибирати.
+      // Вибраний товар має зелену рамку (при кліку робити toogle з класом вибраного елемента)
+      let prodArr = [
+        {
+          srcImg: "../img/rubin.jpg",
+          title: "Цегла Керамейя КлінКерам Рубін",
+          price: 18.99,
+        },
+        {
+          srcImg: "../img/granat.jpg",
+          title: "Цегла Керамейя КлінКерам Гранат",
+          price: 15.55,
+        },
+        {
+          srcImg: "../img/oniks.jpg",
+          title: "Цегла Керамейя КлінКерам Онікс",
+          price: 14.99,
+        },
+        {
+          srcImg: "../img/zhemchug.jpg",
+          title: "Цегла Керамейя КлінКерам Жемчуг",
+          price: 17.99,
+        },
+      ];
+
+      class Cart {
+        constructor({ srcImg, title, price }) {
+          this.srcImg = srcImg;
+          this.title = title;
+          this.price = price;
+        }
+        activeBorder() {
+          let element = this;
+          element.classList.toggle("active");
+        }
+        render(containerSelector) {
+          let cart = document.createElement("a");
+          cart.setAttribute("href", "#");
+          cart.classList.add("cart");
+          cart.onclick = this.activeBorder;
+
+          let cartImage = document.createElement("div");
+          cartImage.classList.add("cart__image");
+          let img = document.createElement("img");
+          img.setAttribute("src", `${this.srcImg}`);
+          cartImage.append(img);
+          cart.append(cartImage);
+
+          let titleDiv = document.createElement("div");
+          titleDiv.classList.add("cart__title");
+          titleDiv.innerText = this.title;
+          cart.append(titleDiv);
+
+          let cartPrice = document.createElement("div");
+          cartPrice.classList.add("cart__price");
+          cartPrice.innerText = `${this.price} грн/шт`;
+          cart.append(cartPrice);
+
+          if (containerSelector) {
+            document.querySelector(containerSelector).append(cart);
+          }
+        }
+      }
+      window.onload = function () {
+        for (const product of prodArr) {
+          new Cart(product).render(".carts");
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 5. Відображаємо картки товарів, які користувач може вибирати.
+            Вибраний товар має зелену рамку (при кліку робити toogle з класом
+            вибраного елемента)
+          </h2>
+          <div class="task__result">
+            <div class="carts">
+              <!-- <a href="" class="cart">
+                <div class="cart__image">
+                  <img src="../img/granat.jpg" />
+                </div>
+                <div class="cart__title">Цегла Керамейя КлінКерам Гранат</div>
+                <div class="cart__price">15.55 грн/шт</div>
+              </a>
+              <a href="" class="cart">
+                <div class="cart__image">
+                  <img src="../img/rubin.jpg" />
+                </div>
+                <div class="cart__title">Цегла Керамейя КлінКерам Рубін</div>
+                <div class="cart__price">18.99 грн/шт</div>
+              </a>
+              <a href="" class="cart">
+                <div class="cart__image">
+                  <img src="../img/oniks.jpg" />
+                </div>
+                <div class="cart__title">Цегла Керамейя КлінКерам Онікс</div>
+                <div class="cart__price">14.99 грн/шт</div>
+              </a>
+              <a href="" class="cart">
+                <div class="cart__image">
+                  <img src="../img/zhemchug.jpg" />
+                </div>
+                <div class="cart__title">Цегла Керамейя КлінКерам Жемчуг</div>
+                <div class="cart__price">17.99 грн/шт</div>
+              </a> -->
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

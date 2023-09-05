@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 6</title>
+    <style>
+      .task__result {
+        display: flex;
+        gap: 40px;
+      }
+      .task__result > div {
+        border: 1px solid #000;
+      }
+    </style>
+    <script>
+      // Задача 6.
+      // Дано список спортсменів.
+      // Потрібно сформувати список тих, які будуть брати участь у змаганні.
+      // При цьому є два стовпці.
+      // В одному відображені всі спортсмени, в іншому – список тих, хто був вибраний.
+      // При натисканні на зелену стрілку спортсмен переміщається у список для змагань.
+      // При натисканні на червону стрілку спортсмен переміщається у загальний список.
+
+      let sportsmanList = [
+        "John Depp",
+        "Sara Wik",
+        "Den Miro",
+        "Alan Woo",
+        "Olga Sich",
+        "Ivan Hal",
+      ];
+
+      class Sportsman {
+        constructor(sportsmanList) {
+          this.sportsmanList = sportsmanList;
+        }
+        moveSportman() {
+          let currentSportman = this;
+          if (currentSportman.closest(".all-sportsman")) {
+            document
+              .querySelector(".selected-sportman__people")
+              .append(currentSportman);
+          } else {
+            document
+              .querySelector(".all-sportman__people")
+              .append(currentSportman);
+          }
+        }
+        render(containerSelector) {
+          let allSportsman = document.createElement("div");
+          allSportsman.classList.add("all-sportsman");
+
+          let allSportmanTitle = document.createElement("div");
+          allSportmanTitle.classList.add("all-sportman__title");
+          allSportmanTitle.innerText = "Загальний список";
+          allSportsman.append(allSportmanTitle);
+
+          let allSportmanPeople = document.createElement("div");
+          allSportmanPeople.classList.add("all-sportman__people");
+          allSportsman.append(allSportmanPeople);
+
+          let selectedSportsman = document.createElement("div");
+          selectedSportsman.classList.add("selected-sportsman");
+
+          let selectedSportmanTitle = document.createElement("div");
+          selectedSportmanTitle.classList.add("selected-sportman__title");
+          selectedSportmanTitle.innerText = "Обрані для змагання";
+          selectedSportsman.append(selectedSportmanTitle);
+
+          let selectedSportmanPeople = document.createElement("div");
+          selectedSportmanPeople.classList.add("selected-sportman__people");
+          selectedSportsman.append(selectedSportmanPeople);
+
+          for (let i = 0; i < this.sportsmanList.length; i++) {
+            let sportmanName = document.createElement("div");
+            sportmanName.classList.add("sportman-name");
+            sportmanName.innerText = `${this.sportsmanList[i]}`;
+            sportmanName.onclick = this.moveSportman;
+            allSportmanPeople.append(sportmanName);
+          }
+
+          if (containerSelector) {
+            document.querySelector(containerSelector).append(allSportsman);
+            document.querySelector(containerSelector).append(selectedSportsman);
+          }
+        }
+      }
+      window.onload = function () {
+        let sportsman = new Sportsman(sportsmanList);
+        sportsman.render(".task__result");
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 6. Дано список спортсменів. Потрібно сформувати список тих,
+            які будуть брати участь у змаганні. При цьому є два стовпці. В
+            одному відображені всі спортсмени, в іншому – список тих, хто був
+            вибраний. При натисканні на зелену стрілку спортсмен переміщається у
+            список для змагань. При натисканні на червону стрілку спортсмен
+            переміщається у загальний список.
+          </h2>
+          <div class="task__result">
+            <!-- <div class="all-sportman">
+              <div class="all-sportman__title">Загальний список</div>
+              <div class="all-sportman__people">
+                <div class="sportman-name">1</div>
+                <div class="sportman-name">2</div>
+                <div class="sportman-name">3</div>
+                <div class="sportman-name">4</div>
+                <div class="sportman-name">5</div>
+              </div>
+            </div>
+            <div class="selected-sportsman">
+              <div class="selected-sportman__title">Обрані для змагання</div>
+              <div class="selected-sportman__people">
+                <div class="sportman-name">1</div>
+                <div class="sportman-name">2</div>
+                <div class="sportman-name">3</div>
+                <div class="sportman-name">4</div>
+                <div class="sportman-name">5</div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

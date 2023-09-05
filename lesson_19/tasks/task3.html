@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="../сss/style.css" /> -->
+    <title>Task 3</title>
+    <style>
+      .birthday > label {
+        margin-bottom: 5px;
+      }
+      button {
+        padding: 5px 10px;
+        background-color: #dadada;
+      }
+    </style>
+    <script>
+      // Задача 3. Дано 5 випадковим чином згенерованих нумерованих списків з рандомними числами
+      // (кількість елементів у списку випадкова від 1 до 10, елементи випадкові – від 1 до 100).
+      // При натисненні на кнопку нумеровані списки з парною кількістю елементів зафарбувати у зелений колір, інші у червоний.
+
+      class List {
+        constructor(
+          listCount = 5,
+          minNumberValue = 1,
+          maxListItems = 10,
+          maxNumberValue = 100
+        ) {
+          this.listCount = listCount;
+          this.minNumberValue = minNumberValue;
+          this.maxNumberValue = maxNumberValue;
+          this.maxListItems = 10;
+        }
+        getRandomNumber(maxNumber) {
+          return (
+            this.minNumberValue +
+            Math.floor(Math.random() * (maxNumber - this.minNumberValue + 1))
+          );
+        }
+        color() {
+          let listArr = document.querySelectorAll("ol");
+          for (const list of listArr) {
+            if (list.children.length % 2 == 0) {
+              list.style.backgroundColor = "green";
+            } else {
+              list.style.backgroundColor = "red";
+            }
+          }
+        }
+        render(containerSelector) {
+          // Генеруємо кількість списків
+          let listsCount = this.getRandomNumber(this.listCount);
+          for (let i = 0; i < listsCount; i++) {
+            let list = document.createElement("ol");
+            // Генеруємо кількість елементів в конкретному списку
+            let itemsCount = this.getRandomNumber(this.maxListItems);
+            for (let j = 0; j < itemsCount; j++) {
+              let listItem = document.createElement("li");
+              listItem.innerText = this.getRandomNumber(this.maxNumberValue);
+              list.append(listItem);
+            }
+            if (containerSelector) {
+              document.querySelector(containerSelector).append(list);
+            }
+          }
+
+          let btn = document.createElement("button");
+          btn.innerText = "Click";
+          btn.onclick = this.color;
+          document.querySelector(containerSelector).append(btn);
+        }
+      }
+      window.onload = function () {
+        let task = new List();
+        task.render(".task__result");
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 3. Дано 5 випадковим чином згенерованих нумерованих списків з
+            рандомними числами (кількість елементів у списку випадкова від 1 до
+            10, елементи випадкові – від 1 до 100). При натисненні на кнопку
+            нумеровані списки з парною кількістю елементів зафарбувати у зелений
+            колір, інші у червоний.
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

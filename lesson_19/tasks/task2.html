@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 2</title>
+    <style>
+      .grnSum,
+      .eurSum,
+      .action {
+        margin-bottom: 5px;
+      }
+      .actions {
+        margin-bottom: 5px;
+      }
+      button {
+        padding: 5px 10px;
+        background-color: #dadada;
+      }
+    </style>
+    <script>
+      // Задача 2. Дано 5 елементів input.
+      // При введенні значення у якийсь із них необхідно автоматично заповнювати інші
+      // (усі попередні у спадному порядку(кожен попередній має значення на 1 менше за наступний),
+      // усі наступні на 1 більше (кожен наступне на 1 більше за попереднього)
+
+      class Input {
+        constructor(count = 5) {
+          this.count = count;
+        }
+        changeValue() {
+          let inpEl = this;
+          let inpValue = parseInt(inpEl.value);
+          let parentEl = inpEl.parentElement;
+
+          // змінюємо наступні значення на 1 більше
+          while (parentEl.nextElementSibling) {
+            parentEl = parentEl.nextElementSibling;
+            inpValue++;
+            parentEl.lastChild.value = inpValue;
+          }
+
+          // змінюємо попередні значення на 1 менше
+          while (parentEl.previousElementSibling) {
+            parentEl = parentEl.previousElementSibling;
+            inpValue--;
+            parentEl.lastChild.value = inpValue;
+          }
+        }
+        render(containerSelector) {
+          for (let i = 1; i <= this.count; i++) {
+            let label = document.createElement("label");
+            label.style.cssText = "display:block; margin-bottom:5px;";
+
+            let inpEl = document.createElement("input");
+            inpEl.setAttribute("type", "number");
+            inpEl.oninput = this.changeValue;
+
+            label.innerText = `Value ${i}`;
+            label.append(inpEl);
+
+            if (containerSelector) {
+              document.querySelector(containerSelector).append(label);
+            }
+          }
+        }
+      }
+
+      window.onload = function () {
+        let task = new Input();
+        task.render(".task__result");
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 2. Дано 5 елементів input. При введенні значення у якийсь із
+            них необхідно автоматично заповнювати інші (усі попередні у спадному
+            порядку(кожен попередній має значення на 1 менше за наступний), усі
+            наступні на 1 більше (кожен наступне на 1 більше за попереднього)
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 7</title>
+    <style>
+      .snowflake {
+        position: absolute;
+      }
+      .snowflake img {
+        width: 10px;
+        height: 10px;
+      }
+    </style>
+    <script>
+      // 7. Задача 7. Відобразити падаючий сніг.
+      // Сніжинка з’являється у верхній частині екрану (top =0) і з випадковою швидкістю рухається вниз
+      // (у setInterval викликати метод, у якому додавати крок до top).
+      // Як тільки сніжинка досягає нижньої частини екрану (top>maxTop) вона знову повинна з’явитись у верхній частині екрану (top=0).
+
+      class Snowflake {
+        constructor(imgSrc) {
+          this.imgSrc = imgSrc;
+        }
+        getRandomNumber(min, max) {
+          return min + Math.floor(Math.random() * (max - min + 1));
+        }
+        snowflakeFall() {
+          let currentTop = parseFloat(this.snowflake.style.top) || 0;
+          this.snowflake.style.left = `${this.getRandomNumber(0, 100)}%`;
+          const maxTop = innerHeight;
+          console.log(maxTop);
+          console.log(currentTop);
+          let interval = this.getRandomNumber(10, 30);
+          console.log(interval);
+          setInterval(() => {
+            currentTop += 1;
+            if (currentTop > maxTop) {
+              currentTop = 0;
+              this.snowflake.style.top = 0;
+            } else {
+              this.snowflake.style.top = currentTop + "px";
+            }
+          }, interval);
+        }
+        render(containerSelector) {
+          this.snowflake = document.createElement("div");
+          this.snowflake.classList.add("snowflake");
+          let imgEl = document.createElement("img");
+          imgEl.setAttribute("src", `${this.imgSrc}`);
+          this.snowflake.append(imgEl);
+
+          if (containerSelector) {
+            document.querySelector(containerSelector).append(this.snowflake);
+          }
+        }
+      }
+      window.onload = function () {
+        let snowflakeImg = "../img/snowflake.svg";
+
+        for (let i = 0; i < 40; i++) {
+          let snowflake = new Snowflake(snowflakeImg);
+          snowflake.render(".task__result");
+          snowflake.snowflakeFall();
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 7. Відобразити падаючий сніг. Сніжинка з’являється у верхній
+            частині екрану (top =0) і з випадковою швидкістю рухається вниз (у
+            setInterval викликати метод, у якому додавати крок до top). Як
+            тільки сніжинка досягає нижньої частини екрану (top>maxTop) вона
+            знову повинна з’явитись у верхній частині екрану (top=0).
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
