@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 6</title>
+    <style></style>
+    <script>
+      // Задача 6.
+      // Дано список автомобілів (марка, рік випуску, ціна).
+      // Сформувати елементи для фільтрування з використанням випадаючого списку
+      // (контент цих випадаючих списків сформувати у залежності від переданого списку).
+
+      let carList = [
+        {
+          brand: "Mercedes",
+          year: 2018,
+          price: 25000,
+        },
+        {
+          brand: "Audi",
+          year: 2020,
+          price: 30000,
+        },
+        {
+          brand: "Audi",
+          year: 2023,
+          price: 55000,
+        },
+        {
+          brand: "Opel",
+          year: 2004,
+          price: 15000,
+        },
+        {
+          brand: "Opel",
+          year: 2004,
+          price: 10000,
+        },
+        {
+          brand: "Range Rover",
+          year: 2020,
+          price: 45000,
+        },
+        {
+          brand: "Range Rover",
+          year: 2018,
+          price: 40000,
+        },
+      ];
+
+      class Filter {
+        constructor(carList) {
+          this.carList = carList;
+        }
+        onFilter() {
+          const filterItems = new CustomEvent("filter", {
+            detail: {
+              filterDiv: this.filterDiv,
+              // carBrands: this.selectBrand.children,
+              // carYears: this.selectYear.children,
+            },
+          });
+
+          this.filterDiv.dispatchEvent(filterItems);
+          // this.selectBrand.dispatchEvent(filterItems);
+          // this.selectYear.dispatchEvent(filterItems);
+        }
+        render(containerSelector) {
+          let div = document.createElement("div");
+          div.classList.add("filter");
+          div.addEventListener("change", this.onFilter.bind(this));
+          this.filterDiv = div;
+
+          let brandLabel = document.createElement("label");
+          brandLabel.innerText = "Марка";
+          div.append(brandLabel);
+
+          let selectBrand = document.createElement("select");
+          selectBrand.setAttribute("name", "carBrand");
+          selectBrand.classList.add("car-brands");
+          // selectBrand.addEventListener("change", this.onFilter.bind(this));
+          brandLabel.append(selectBrand);
+
+          // this.selectBrand = selectBrand;
+
+          let yearLabel = document.createElement("label");
+          yearLabel.innerText = "Рік випуску";
+          div.append(yearLabel);
+
+          let selectYear = document.createElement("select");
+          selectYear.setAttribute("name", "carYearProduction");
+          selectYear.classList.add("car-years");
+          // selectYear.addEventListener("change", this.onFilter.bind(this));
+          yearLabel.append(selectYear);
+
+          // this.selectYear = selectYear;
+
+          if (containerSelector) {
+            document.querySelector(containerSelector).append(div);
+          }
+
+          this.carList.forEach((car) => {
+            let carBrand = car.brand;
+            // let carYear = car.year;
+
+            let carBrands = document.querySelector(".car-brands");
+            let carBrandsItems = carBrands.children;
+
+            for (const brand of carBrandsItems) {
+              if (carBrand === brand.textContent) {
+                return;
+              }
+            }
+
+            let optionBrand = document.createElement("option");
+            optionBrand.setAttribute("value", carBrand.toLowerCase());
+            optionBrand.innerText = carBrand;
+            selectBrand.append(optionBrand);
+
+            // let carYears = document.querySelector(".car-years");
+            // let carYearsItem = carYears.children;
+
+            // for (const year of carYearsItem) {
+            //   if (carYear == year.textContent) {
+            //     return;
+            //   }
+            // }
+
+            // let optionYear = document.createElement("option");
+            // optionYear.setAttribute("value", carYear);
+            // optionYear.innerText = carYear;
+            // selectYear.append(optionYear);
+          });
+
+          this.carList.forEach((car) => {
+            let carYear = car.year;
+
+            let carYears = document.querySelector(".car-years");
+            let carYearsItem = carYears.children;
+
+            for (const year of carYearsItem) {
+              if (carYear == year.textContent) {
+                return;
+              }
+            }
+
+            let optionYear = document.createElement("option");
+            optionYear.setAttribute("value", carYear);
+            optionYear.innerText = carYear;
+            selectYear.append(optionYear);
+          });
+        }
+      }
+
+      class Car {
+        constructor(carList) {
+          this.carList = carList;
+        }
+        search(e) {
+          let mainDiv = e.detail.filterDiv;
+
+          let findBrand = mainDiv.firstChild;
+          let findYear = mainDiv.lastChild;
+
+          let brandListOptions = findBrand.querySelectorAll(".car-brands > *");
+          let yearListOptions = findYear.querySelectorAll(".car-years > *");
+          console.log(brandListOptions);
+          console.log(yearListOptions);
+          // let findBrand = e.detail.carBrands;
+          // let findYear = e.detail.carYears;
+          let list = document.querySelectorAll(".car-list__item");
+          for (const brand of /*findBrand*/ brandListOptions) {
+            for (const year of /*findYear*/ yearListOptions) {
+              if (brand.selected && year.selected) {
+                list.forEach((list) => {
+                  let currentItem = list.textContent;
+                  if (
+                    currentItem.includes(brand.textContent) &&
+                    currentItem.includes(year.textContent)
+                  ) {
+                    list.style.display = "block";
+                  } else {
+                    list.style.display = "none";
+                  }
+                });
+              }
+            }
+          }
+        }
+        render(containerSelector) {
+          let div = document.createElement("div");
+          div.classList.add("car-list");
+
+          let h2 = document.createElement("h2");
+          h2.innerText = "Список";
+          div.append(h2);
+
+          for (const car of carList) {
+            let carListItem = document.createElement("div");
+            carListItem.classList.add("car-list__item");
+            carListItem.innerText = `${car.brand} - ${car.year}р. - ${car.price}$`;
+            div.append(carListItem);
+          }
+
+          if (containerSelector) {
+            document.querySelector(containerSelector).append(div);
+          }
+        }
+      }
+      window.onload = function () {
+        let filter = new Filter(carList);
+        filter.render(".task__result");
+
+        let car = new Car(carList);
+        car.render(".task__result");
+        filter.filterDiv.addEventListener("filter", car.search);
+        // filter.selectBrand.addEventListener("filter", car.search);
+        // filter.selectYear.addEventListener("filter", car.search);
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 6. Дано список автомобілів (марка, рік випуску, ціна).
+            Сформувати елементи для фільтрування з використанням випадаючого
+            списку (контент цих випадаючих списків сформувати у залежності від
+            переданого списку).
+          </h2>
+          <div class="task__result">
+            <!-- <div class="filter">
+              <label>
+                Марка
+                <select name="">
+                  <option value="">1</option>
+                  <option value="">2</option>
+                  <option value="">3</option>
+                </select>
+              </label>
+              <label>
+                Рік випуску
+                <select name="">
+                  <option value="">1</option>
+                  <option value="">2</option>
+                  <option value="">3</option>
+                </select>
+              </label>
+            </div>
+            <div class="car-list">
+              <h2>Список</h2>
+              <div class="car-list__item">Mercedes - 2018р. - 2500$</div>
+            </div> -->
+          </div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

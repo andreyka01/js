@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 2</title>
+    <style>
+      .wrapper {
+        overflow: hidden;
+      }
+      img {
+        display: block;
+        width: 200px;
+        position: absolute;
+      }
+    </style>
+    <script>
+      // Задача 2. Байрактар.
+      // З верхньої частини екрану у випадковій позиції по горизонталі з’являються танки, які їдуть вниз.
+      // При кліку на танк він вибухає і зникає з екрану.
+
+      class Tank {
+        constructor(imgPath) {
+          this.imgPath = imgPath;
+        }
+        getRandomValue(min = 0, max = 100) {
+          return min + Math.floor(Math.random() * (max - min + 1));
+        }
+        move() {
+          let currentTop = 0;
+          this.img.style.top = currentTop + "px";
+          const step = 1;
+          const interval = this.getRandomValue(10, 70);
+          console.log(interval);
+
+          let intervalId = setInterval(() => {
+            currentTop += step;
+            this.img.style.top = currentTop + "px";
+          }, interval);
+          this.intervalId = intervalId;
+        }
+        hitTank() {
+          clearInterval(this.intervalId);
+          let el = this.img.parentElement;
+          this.img.setAttribute("src", "../img/explosion.jpg");
+          setTimeout(() => {
+            el.remove();
+          }, 1500);
+        }
+        render(containerSelector) {
+          let el = document.createElement("div");
+          let img = document.createElement("img");
+          img.setAttribute("src", this.imgPath);
+          el.append(img);
+
+          img.style.top = 0 + "px";
+          img.style.left = this.getRandomValue() + "%";
+
+          img.addEventListener("click", this.hitTank.bind(this));
+          this.img = img;
+
+          if (containerSelector) {
+            document.querySelector(containerSelector).append(el);
+          }
+          this.move();
+        }
+      }
+
+      window.onload = function () {
+        const imgSrc = "../img/tank.png";
+        for (let count = 0; count < 3; count++) {
+          let tank = new Tank(imgSrc);
+          tank.render(".task__result");
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 2. Байрактар. З верхньої частини екрану у випадковій позиції
+            по горизонталі з’являються танки, які їдуть вниз. При кліку на танк
+            він вибухає і зникає з екрану.
+          </h2>
+          <div class="task__result">
+            <!-- <div>
+              <img src="../img/tank.png"/>
+            </div> -->
+          </div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

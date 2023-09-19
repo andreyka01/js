@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 4</title>
+    <style>
+      form > * {
+        display: block;
+        margin-bottom: 5px;
+      }
+      button {
+        padding: 5px 10px;
+        background-color: #dadada;
+      }
+    </style>
+    <script>
+      // Задача 4.
+      // На сторінці міститься певна кількість кнопок і інпутів.
+      // Підраховувати загальну кількість кліків окремо на кнопках і окремо на інпутах.
+
+      class FormElements {
+        constructor(btnCount = 2, inpCount = 2) {
+          this.btnCount = btnCount;
+          this.inpCount = inpCount;
+          this.btnClick = 0;
+          this.inpClick = 0;
+        }
+        formClick(e) {
+          let element = e.target;
+          if (element.tagName === "BUTTON") {
+            this.btnClick++;
+            this.divBtn.querySelector("span").innerText = this.btnClick;
+          }
+
+          if (element.tagName === "INPUT") {
+            this.inpClick++;
+            this.divInput.querySelector("span").innerText = this.inpClick;
+          }
+        }
+        render(containerSelector) {
+          let form = document.createElement("form");
+          form.setAttribute("action", "#");
+          form.setAttribute("method", "post");
+
+          for (let btnCount = 1; btnCount <= this.btnCount; btnCount++) {
+            let button = document.createElement("button");
+            button.setAttribute("type", "button");
+            button.innerText = "Button";
+            form.append(button);
+          }
+
+          for (let inpCount = 1; inpCount <= this.inpCount; inpCount++) {
+            let input = document.createElement("input");
+            input.setAttribute("placeholder", "text");
+            form.append(input);
+          }
+
+          let divButton = document.createElement("div");
+          divButton.innerHTML = `Кількість кліків по кнопці: <span>${this.btnClick}<span>`;
+          this.divBtn = divButton;
+
+          let divInput = document.createElement("div");
+          divInput.innerHTML = `Кількість кліків по полю: <span>${this.inpClick}<span>`;
+          this.divInput = divInput;
+
+          form.addEventListener("click", this.formClick.bind(this));
+
+          if (containerSelector) {
+            let wrapper = document.querySelector(containerSelector);
+            wrapper.append(form);
+            wrapper.append(divButton);
+            wrapper.append(divInput);
+          }
+        }
+      }
+
+      window.onload = function () {
+        let form = new FormElements();
+        form.render(".task__result");
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 4. На сторінці міститься певна кількість кнопок і інпутів.
+            Підраховувати загальну кількість кліків окремо на кнопках і окремо
+            на інпутах.
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

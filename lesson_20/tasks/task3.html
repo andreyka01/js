@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 3</title>
+    <style>
+      input {
+        display: block;
+        margin-bottom: 5px;
+      }
+    </style>
+    <script>
+      // Задача 3. На формі вводять 7 числових значень (вік, зріст, вага, заробітна плата, стаж, номер відділу, порядковий номер).
+      // Додати подію обробки події click на форму і якщо клік на внутрішньому input,
+      // то автоматично замінювати значення його на 0. Використати делегування
+
+      class Form {
+        formClick(e) {
+          let element = e.target;
+          if (element.tagName === "INPUT") {
+            element.value = 0;
+          }
+        }
+        render(containerSelector) {
+          // Генеруємо форму
+          let form = document.createElement("form");
+          form.setAttribute("action", "#");
+          form.setAttribute("method", "post");
+
+          // Генеруэмо поля форми
+          let labels = [
+            "Age",
+            "Heigh",
+            "Weigh",
+            "Salary",
+            "Experience",
+            "Department",
+            "Number",
+          ];
+          labels.forEach((label) => {
+            let input = document.createElement("input");
+            input.setAttribute("type", "number");
+            input.setAttribute("placeholder", label);
+            form.append(input);
+            form.addEventListener("click", this.formClick);
+          });
+
+          if (containerSelector) {
+            document.querySelector(containerSelector).append(form);
+          }
+        }
+      }
+
+      window.onload = function () {
+        let form = new Form();
+        form.render(".task__result");
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 3. На формі вводять 7 числових значень (вік, зріст, вага,
+            заробітна плата, стаж, номер відділу, порядковий номер). Додати
+            подію обробки події click на форму і якщо клік на внутрішньому
+            input, то автоматично замінювати значення його на 0. Використати
+            делегування
+          </h2>
+          <div class="task__result">
+            <!-- <form action="#" method="post">
+              <input type="number" placeholder="Age" />
+              <input type="number" placeholder="Heigh" />
+              <input type="number" placeholder="Weigh" />
+              <input type="number" placeholder="Salary" />
+              <input type="number" placeholder="Experience" />
+              <input type="number" placeholder="Department" />
+              <input type="number" placeholder="Number" />
+            </form> -->
+          </div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

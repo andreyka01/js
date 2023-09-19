@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 1</title>
+    <style>
+      body {
+        overflow: hidden;
+        background-color: rgb(18, 18, 36);
+      }
+      img {
+        position: absolute;
+        transition: all 0.3s ease;
+      }
+    </style>
+    <script>
+      // Задача 1. Сяючі зорі.
+      // Вказана кількість зірочок повинна з’являтися у випадковій частині екрану.
+      // Кожна зірка (це екземпляр класу Star) з певним кроком і інтервалом збільшується від мінімального до максимального розміру.
+      // Як тільки досягнути максимального розміру зірочка повинна з’являтися у іншій випадковій позиції.
+      class Star {
+        constructor(imgPath, step = 1, interval = 100) {
+          this.imgPath = imgPath;
+          this.step = step;
+          this.interval = interval;
+        }
+        getRandomValue(min = 0, max = 100) {
+          return min + Math.floor(Math.random() * (max - min + 1));
+        }
+        increasing(minWidth = 20, maxWidth = 50) {
+          // Встановлюємо позицію зірочки
+          this.el.style.top = this.getRandomValue() + "%";
+          this.el.style.left = this.getRandomValue() + "%";
+
+          // Встановлюємо ширину зірочки
+          let currentWidth = minWidth;
+          this.el.style.width = currentWidth + "px";
+          let intervalId = setInterval(() => {
+            // Додаємо крок до ширини зірочки
+            currentWidth += this.step;
+            this.el.style.width = currentWidth + "px";
+            if (currentWidth >= maxWidth) {
+              clearInterval(intervalId);
+
+              // Якщо ширина зірочки більша максимальної то встановлюємо мінімальну ширину
+              currentWidth = minWidth;
+              this.increasing();
+            }
+          }, this.interval);
+        }
+        render(containerSelector) {
+          let el = document.createElement("div");
+          let img = document.createElement("img");
+          img.setAttribute("src", this.imgPath);
+          el.append(img);
+          this.el = img;
+          if (containerSelector) {
+            let wrapper = document.querySelector(containerSelector);
+            wrapper.append(el);
+          }
+          this.increasing();
+        }
+      }
+
+      window.onload = function () {
+        const imgPath = "../img/star.svg";
+        for (let count = 1; count <= 7; count++) {
+          let star1 = new Star(imgPath);
+          star1.render(".task__result");
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 1. Сяючі зорі. Вказана кількість зірочок повинна з’являтися у
+            випадковій частині екрану. Кожна зірка (це екземпляр класу Star) з
+            певним кроком і інтервалом збільшується від мінімального до
+            максимального розміру. Як тільки досягнути максимального розміру
+            зірочка повинна з’являтися у іншій випадковій позиції.
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

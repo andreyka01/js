@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 5</title>
+    <script>
+      // Задача 5. Динамічний пошук.
+      // Є список працівників і поле пошуку.
+      // При введенні відображаються усі, які містять вказаний фрагмент
+      let workersList = [
+        {
+          firstName: "Andrew",
+          lastName: "Bader",
+        },
+        {
+          firstName: "Tom",
+          lastName: "Gun",
+        },
+        {
+          firstName: "Victor",
+          lastName: "Reizen",
+        },
+        {
+          firstName: "Olga",
+          lastName: "Dell",
+        },
+      ];
+
+      class Search {
+        // Метод для створення власного Event
+        onChange() {
+          const findText = new CustomEvent("findText", {
+            detail: {
+              currentText: this.input.value,
+            },
+          });
+
+          this.input.dispatchEvent(findText);
+        }
+        // Сторюємо структуру для відображення на екрані
+        render(containerSelector) {
+          let input = document.createElement("input");
+          input.setAttribute("placeholder", "Search");
+          // На інпут додаємо подію "input", яка буде викликати метод onChange
+          input.addEventListener("input", this.onChange.bind(this));
+          this.input = input;
+
+          if (containerSelector) {
+            document.querySelector(containerSelector).append(input);
+          }
+        }
+      }
+
+      class Employee {
+        constructor(data) {
+          this.data = data;
+        }
+        search(e) {
+          let findText = e.detail.currentText;
+          let employee = document.querySelectorAll(".employee");
+          employee.forEach((element) => {
+            let name = element.textContent.toLowerCase();
+            if (name.includes(findText)) {
+              element.style.display = "block";
+            } else {
+              element.style.display = "none";
+            }
+          });
+        }
+        // Сторюємо структуру для відображення на екрані
+        render(containerSelector) {
+          let divEmployees = document.createElement("div");
+          for (const employee of this.data) {
+            let divEmployee = document.createElement("div");
+            divEmployee.classList.add("employee");
+            divEmployee.innerText = `${employee.firstName} ${employee.lastName}`;
+            divEmployees.append(divEmployee);
+          }
+          if (containerSelector) {
+            document.querySelector(containerSelector).append(divEmployees);
+          }
+        }
+      }
+      window.onload = function () {
+        let search = new Search();
+        search.render(".task__result");
+
+        let employee = new Employee(workersList);
+        employee.render(".task__result");
+
+        // Додваємо створену подію на input та викликаємо метод search
+        search.input.addEventListener("findText", employee.search);
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 5. Динамічний пошук. Є список працівників і поле пошуку. При
+            введенні відображаються усі, які містять вказаний фрагмент
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
