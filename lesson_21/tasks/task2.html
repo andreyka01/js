@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 2</title>
+    <style>
+      button {
+        padding: 5px 10px;
+        background-color: #dadada;
+      }
+    </style>
+    <script>
+      // Задача 2. Створити клас Bank, у якому зберігається масив клієнтів. Виконати такі операції
+      // Вивести усіх простих клієнтів;
+      // Вивести усіх клієнтів GoldenClient;
+      // Знати сумарну кількість грошей на рахунку;
+
+      class Bank {
+        constructor(clientList) {
+          this.clientList = clientList;
+        }
+        findSimpleClients() {
+          return this.clientList.filter(
+            (client) =>
+              client instanceof Client && !(client instanceof GoldenClient)
+          );
+        }
+        findGoldenClients() {
+          return this.clientList.filter(
+            (client) => client instanceof GoldenClient
+          );
+        }
+        totalMoney() {
+          return this.clientList.reduce(
+            (prevSum, client) => prevSum + client.money,
+            0
+          );
+        }
+      }
+
+      class Client {
+        constructor(id, name, money) {
+          this.id = id;
+          this.name = name;
+          this.money = money;
+        }
+        addMoney() {
+          let moneyAmount = parseFloat(this.clientAddMoneyInput.value);
+          let userBalance = parseFloat(this.clientBalanceSpan.textContent);
+          if (!isNaN(moneyAmount)) {
+            if (moneyAmount >= 0) {
+              userBalance += moneyAmount;
+              this.Money = userBalance;
+              this.clientBalanceSpan.innerText = this.Money;
+              this.clientAddMoneyInput.value = "";
+            } else {
+              throw new Error(
+                "Помилка! Сума для поповнення рахунку має бути більше 0!"
+              );
+            }
+          } else {
+            throw new Error("Помилка! Введено не числове значення!");
+          }
+        }
+        withdrawMoney() {
+          let moneyAmount = parseFloat(this.clientWithdrawMoneyInput.value);
+          let userBalance = parseFloat(this.clientBalanceSpan.textContent);
+          if (!isNaN(moneyAmount)) {
+            if (moneyAmount >= 0) {
+              if (moneyAmount <= this.money) {
+                userBalance -= moneyAmount;
+                this.money = userBalance;
+                this.clientBalanceSpan.innerText = this.money;
+                this.clientWithdrawMoneyInput.value = "";
+              } else {
+                throw new Error("Помилка! Недостатньо грошей на рахунку!");
+              }
+            } else {
+              throw new Error("Сума для зняття з рахунку має бути більше 0!");
+            }
+          } else {
+            throw new Error("Помилка! Введено не числове значення!");
+          }
+        }
+        render(containerSelector) {
+          let client = document.createElement("div");
+          client.classList.add("client");
+          this.clientDiv = client;
+
+          let clientId = document.createElement("div");
+          clientId.classList.add("client__id");
+          clientId.innerText = "id: ";
+          let clientIdSpan = document.createElement("span");
+          clientIdSpan.innerText = this.id;
+          clientId.append(clientIdSpan);
+          this.clientIdSpan = clientIdSpan;
+
+          client.append(clientId);
+
+          let clientName = document.createElement("div");
+          clientName.classList.add("client__name");
+          clientName.innerText = "name: ";
+          let clientNameSpan = document.createElement("span");
+          clientNameSpan.innerText = this.name;
+          clientName.append(clientNameSpan);
+          this.clientNameSpan = clientNameSpan;
+
+          client.append(clientName);
+
+          let clientBalance = document.createElement("div");
+          clientBalance.classList.add("client__balance");
+          clientBalance.innerText = "balance: ";
+          let clientBalanceSpan = document.createElement("span");
+          clientBalanceSpan.innerText = this.money;
+          clientBalance.append(clientBalanceSpan);
+          this.clientBalanceSpan = clientBalanceSpan;
+
+          client.append(clientBalance);
+
+          let clientActions = document.createElement("div");
+          clientActions.classList.add("client__actions");
+          client.append(clientActions);
+
+          let clientAddMoneyDiv = document.createElement("div");
+          clientAddMoneyDiv.classList.add("client__addMoney");
+          let clientAddMoneyLabel = document.createElement("label");
+          clientAddMoneyLabel.innerText = "Введіть суму для поповнення рахунку";
+          let clientAddMoneyInput = document.createElement("input");
+          clientAddMoneyInput.setAttribute("type", "text");
+          clientAddMoneyInput.classList.add("client__money-add");
+          this.clientAddMoneyInput = clientAddMoneyInput;
+          let clientAddMoneyButton = document.createElement("button");
+          clientAddMoneyButton.setAttribute("type", "button");
+          clientAddMoneyButton.classList.add("money-add");
+          clientAddMoneyButton.innerText = "Поповнити рахунок";
+          clientAddMoneyButton.onclick = this.addMoney.bind(this);
+
+          clientActions.append(clientAddMoneyDiv);
+          clientAddMoneyDiv.append(clientAddMoneyLabel);
+          clientAddMoneyLabel.append(clientAddMoneyInput);
+          clientAddMoneyLabel.append(clientAddMoneyButton);
+
+          let clientWithdrawMoneyDiv = document.createElement("div");
+          clientWithdrawMoneyDiv.classList.add("client__withdrawMoney");
+          let clientWithdrawMoneyLabel = document.createElement("label");
+          clientWithdrawMoneyLabel.innerText =
+            "Введіть суму для зняття коштів з рахунку";
+          let clientWithdrawMoneyInput = document.createElement("input");
+          clientWithdrawMoneyInput.setAttribute("type", "text");
+          clientWithdrawMoneyInput.classList.add("client__money-withdraw");
+          this.clientWithdrawMoneyInput = clientWithdrawMoneyInput;
+          let clientWithdrawMoneyButton = document.createElement("button");
+          clientWithdrawMoneyButton.setAttribute("type", "button");
+          clientWithdrawMoneyButton.classList.add("money-withdraw");
+          clientWithdrawMoneyButton.innerText = "Зняти кошти";
+          clientWithdrawMoneyButton.onclick = this.withdrawMoney.bind(this);
+
+          clientActions.append(clientWithdrawMoneyDiv);
+          clientWithdrawMoneyDiv.append(clientWithdrawMoneyLabel);
+          clientWithdrawMoneyLabel.append(clientWithdrawMoneyInput);
+          clientWithdrawMoneyLabel.append(clientWithdrawMoneyButton);
+
+          if (containerSelector) {
+            document.querySelector(containerSelector).append(client);
+          }
+        }
+        toString() {
+          return `${this.id} - ${this.name} - ${this.money}`;
+        }
+      }
+
+      class GoldenClient extends Client {
+        constructor(id, name, money, limitCreditFunds, percentage) {
+          super(id, name, money);
+          this.limitCreditFunds = limitCreditFunds;
+          this.percentage = percentage;
+        }
+        withdrawMoney() {
+          try {
+            let moneyAmount = parseFloat(this.clientWithdrawMoneyInput.value);
+            let userBalance = parseFloat(this.clientBalanceSpan.textContent);
+            if (!isNaN(moneyAmount)) {
+              if (moneyAmount >= 0) {
+                if (moneyAmount <= userBalance) {
+                  userBalance -= moneyAmount;
+                  this.money = userBalance;
+                  this.clientBalanceSpan.innerText = this.money;
+                  this.clientWithdrawMoneyInput.value = "";
+                } else {
+                  userBalance -= moneyAmount;
+
+                  let creditMoney = parseFloat(this.creditFunsSpan.textContent);
+                  let usedCreditFuns = Math.abs(userBalance);
+                  if (usedCreditFuns <= creditMoney) {
+                    this.clientBalanceSpan.innerText = 0;
+                    this.creditFunsSpan.innerText =
+                      creditMoney - usedCreditFuns;
+                    this.defineFine(usedCreditFuns);
+                  } else {
+                    throw new Error("Недостатньо кредитних коштів!");
+                  }
+                }
+              } else {
+                throw new Error("Сума для зняття з рахунку має бути більше 0!");
+              }
+            } else {
+              throw new Error("Помилка! Введено не числове значення!");
+            }
+          } catch (err) {
+            console.log(err.message);
+          }
+        }
+        defineFine(usedCreditMoney) {
+          let fineValue = parseFloat(this.fineValueSpan.textContent);
+          fineValue =
+            fineValue +
+            (usedCreditMoney + (usedCreditMoney * this.percentage) / 100);
+          this.fineValueSpan.innerText = fineValue;
+        }
+        render(containerSelector) {
+          super.render(containerSelector);
+          let creditFuns = document.createElement("div");
+          creditFuns.classList.add("client__credit");
+          creditFuns.innerText = "credit funs: ";
+          let creditFunsSpan = document.createElement("span");
+          creditFunsSpan.innerText = this.limitCreditFunds;
+          this.creditFunsSpan = creditFunsSpan;
+          creditFuns.append(creditFunsSpan);
+
+          let percentageFine = document.createElement("div");
+          percentageFine.classList.add("client__percentage-fine");
+          percentageFine.innerText = "percentage fine: ";
+          let percentageFineSpan = document.createElement("span");
+          percentageFineSpan.innerText = this.percentage;
+          percentageFine.append(percentageFineSpan);
+
+          let fineValue = document.createElement("div");
+          fineValue.classList.add("client__fine");
+          fineValue.innerText = "fine: ";
+          let fineValueSpan = document.createElement("span");
+          fineValueSpan.innerText = 0;
+          this.fineValueSpan = fineValueSpan;
+          fineValue.append(fineValueSpan);
+
+          this.clientDiv.append(creditFuns);
+          this.clientDiv.append(percentageFine);
+          this.clientDiv.append(fineValue);
+        }
+        toString() {
+          return `${this.id} - ${this.name} - ${this.money} - ${this.limitCreditFunds} - ${this.percentage}`;
+        }
+      }
+
+      window.onload = function () {
+        let clientsList = [
+          new Client(1, "Andrii", 1000),
+          new Client(2, "Vasilii", 1500),
+          new GoldenClient(3, "Vitalii", 2000, 1000, 5),
+          new GoldenClient(4, "Olga", 3000, 500, 3),
+        ];
+        let bank = new Bank(clientsList);
+        console.log(bank.findSimpleClients());
+        console.log(bank.findGoldenClients());
+        console.log(`Total: ${bank.totalMoney()}`);
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 2. Створити клас Bank, у якому зберігається масив клієнтів.
+            Виконати такі операції Вивести усіх простих клієнтів; Вивести усіх
+            клієнтів GoldenClient; Знати сумарну кількість грошей на рахунку;
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

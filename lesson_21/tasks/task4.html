@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 4</title>
+    <style>
+      button {
+        padding: 5px 10px;
+        background-color: #dadada;
+      }
+    </style>
+    <script>
+      // Задача 4.
+      // Користувач задає місяць навчання учня (перевіряти чи є
+      // числом, чи від 1 до 12, чи не канікули) та оцінку (перевіряти чи є
+      // числом, чи від 1 до 100). Вивести чи зможе він виправити оцінку
+      // (якщо оцінка погана і це не останній місяць у семестрі) . Обробку
+      // усіх помилок зробити з використанням відповідних класів.
+      class IsNotNumberError extends Error {
+        constructor() {
+          super();
+          this.message = "Має бути числом!";
+          this.name = "IsNotNumberError";
+        }
+      }
+      class IsNotInRangeError extends Error {
+        constructor() {
+          super();
+          this.message = "Має знаходиться в діапазоні допустимих значень!";
+          this.name = "IsNotInRangeError";
+        }
+      }
+      class IsNotAcademicMonthError extends Error {
+        constructor() {
+          super();
+          this.message = "Канікули! Місяць не навчальний!";
+          this.name = "IsNotAcademicMonthError";
+        }
+      }
+
+      class Pupil {
+        checkPupil() {
+          let monthValue = parseInt(this.monthInp.value);
+          let gradeValue = parseInt(this.gradeInp.value);
+          this.resultEl.innerText = "";
+          try {
+            if (!isNaN(monthValue) && !isNaN(gradeValue)) {
+              if (monthValue > 0 && monthValue < 13) {
+                if (monthValue < 6 || monthValue > 8) {
+                  if (gradeValue > 0 && gradeValue < 101) {
+                    if (
+                      monthValue !== 12 &&
+                      monthValue !== 5 &&
+                      gradeValue <= 20
+                    ) {
+                      this.resultEl.innerText = "Учень може виправити оцінку!";
+                    } else {
+                      this.resultEl.innerText =
+                        "Учень не може виправити оцінку!";
+                    }
+                  } else {
+                    throw new IsNotInRangeError();
+                  }
+                } else {
+                  throw new IsNotAcademicMonthError();
+                }
+              } else {
+                throw new IsNotInRangeError();
+              }
+            } else {
+              throw new IsNotNumberError();
+            }
+          } catch (err) {
+            if (err instanceof IsNotNumberError) {
+              console.log("Місяць та Оцінка " + err.message);
+            } else if (err instanceof IsNotInRangeError) {
+              console.log("Місяць та Оцінка " + err.message);
+            } else if (err instanceof IsNotAcademicMonthError) {
+              console.log(err.message);
+            } else {
+              console.log(err.message);
+            }
+          }
+        }
+        render(containerSelector) {
+          let mainDiv = document.createElement("div");
+          mainDiv.classList.add("task__pupil");
+          mainDiv.classList.add("pupil");
+
+          let inpDivMonth = document.createElement("div");
+          inpDivMonth.classList.add("pupil__input");
+          let labelInpMonth = document.createElement("label");
+          labelInpMonth.innerText = "Місяць навчання (1 - 12)";
+          let monthInput = document.createElement("input");
+          monthInput.classList.add("pupil__month");
+          this.monthInp = monthInput;
+
+          mainDiv.append(inpDivMonth);
+          inpDivMonth.append(labelInpMonth);
+          labelInpMonth.append(monthInput);
+
+          let inpDivGrade = document.createElement("div");
+          inpDivGrade.classList.add("pupil__input");
+          let labelInpGrade = document.createElement("label");
+          labelInpGrade.innerText = "Оцінка (1 - 100)";
+          let gradeInput = document.createElement("input");
+          gradeInput.classList.add("pupil__grade");
+          this.gradeInp = gradeInput;
+
+          mainDiv.append(inpDivGrade);
+          inpDivGrade.append(labelInpGrade);
+          labelInpGrade.append(gradeInput);
+
+          let button = document.createElement("button");
+          button.setAttribute("type", "button");
+          button.classList.add("pupil__button");
+          button.innerText = "Перевірити";
+          button.addEventListener("click", this.checkPupil.bind(this));
+
+          mainDiv.append(button);
+
+          let resultDiv = document.createElement("div");
+          resultDiv.classList.add("pupil__result");
+          mainDiv.append(resultDiv);
+          this.resultEl = resultDiv;
+
+          if (containerSelector) {
+            document.querySelector(containerSelector).append(mainDiv);
+          }
+        }
+      }
+      window.onload = function () {
+        let pupil = new Pupil();
+        pupil.render(".task__result");
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 4. Користувач задає місяць навчання учня (перевіряти чи є
+            числом, чи від 1 до 12, чи не канікули) та оцінку (перевіряти чи є
+            числом, чи від 1 до 100). Вивести чи зможе він виправити оцінку
+            (якщо оцінка погана і це не останній місяць у семестрі) . Обробку
+            усіх помилок зробити з використанням відповідних класів.
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

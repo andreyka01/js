@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../сss/style.css" />
+    <title>Task 3</title>
+    <style>
+      .image img {
+        width: 100px;
+      }
+      .image {
+        position: absolute;
+        display: inline-block;
+      }
+    </style>
+    <script>
+      // Задача 3. Розробити Класи. Подумайте яким має бути спільний клас предок.
+      class Action {
+        constructor(coordinateX, coordinateY, imgSrc, interval) {
+          this.x = coordinateX;
+          this.y = coordinateY;
+          this.imgSrc = imgSrc;
+          this.interval = interval;
+        }
+        getRandomNumber(min, max) {
+          return min + Math.floor(Math.random() * (max - min + 1));
+        }
+        render(containerSelector) {
+          let imageDiv = document.createElement("div");
+          imageDiv.classList.add("image");
+          imageDiv.style.top = this.y + "%";
+          imageDiv.style.left = this.x + "%";
+          this.imageDiv = imageDiv;
+          let image = document.createElement("img");
+          image.setAttribute("src", this.imgSrc);
+          imageDiv.append(image);
+
+          if (containerSelector) {
+            document.querySelector(containerSelector).append(imageDiv);
+          }
+        }
+      }
+      class House extends Action {
+        constructor(coordinateX, coordinateY, imgSrc, interval) {
+          super(coordinateX, coordinateY, imgSrc, interval);
+        }
+        updateScale() {
+          setInterval(() => {
+            this.imageDiv.style.transform = `scale(${this.getRandomNumber(
+              0.5,
+              2
+            )})`;
+          }, this.interval);
+        }
+      }
+
+      class Dog extends Action {
+        constructor(coordinateX, coordinateY, imgSrc, interval) {
+          super(coordinateX, coordinateY, imgSrc, interval);
+        }
+        moveX() {
+          setInterval(() => {
+            this.imageDiv.style.left = this.getRandomNumber(20, 80) + "%";
+          }, this.interval);
+        }
+      }
+
+      class Bird extends Action {
+        constructor(coordinateX, coordinateY, imgSrc, interval) {
+          super(coordinateX, coordinateY, imgSrc, interval);
+        }
+        moveY() {
+          setInterval(() => {
+            this.imageDiv.style.top = this.getRandomNumber(20, 80) + "%";
+          }, this.interval);
+        }
+      }
+
+      window.onload = function () {
+        let houseImageSrc = "../img/house.svg";
+        let house = new House(30, 10, houseImageSrc, 1000);
+        house.render(".task__result");
+        house.updateScale();
+
+        let dogImageSrc = "../img/dog.svg";
+        let dog = new Dog(40, 20, dogImageSrc, 1000);
+        dog.render(".task__result");
+        dog.moveX();
+
+        let birdImageSrc = "../img/bird.svg";
+        let bird = new Bird(10, 30, birdImageSrc, 1000);
+        bird.render(".task__result");
+        bird.moveY();
+      };
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="block">
+        <div class="block__task task">
+          <h2 class="tast__name">
+            Задача 3. Розробити Класи. Подумайте яким має бути спільний клас
+            предок.
+          </h2>
+          <div class="task__result"></div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>
